@@ -61,13 +61,15 @@ function pilau_base_setup() {
  *
  * @since	Pilau_Base 0.1
  */
-if ( ! is_admin() && ! pilau_is_login_page() )
-	add_action( 'wp_enqueue_scripts', 'pilau_base_enqueue_scripts', 1 );
+add_action( 'wp_enqueue_scripts', 'pilau_base_enqueue_scripts', 1 );
 function pilau_base_enqueue_scripts() {
+	// This test is done here because applying the test to the hook breaks due to pilau_is_login_page() not being defined yet...
+	if ( ! is_admin() && ! pilau_is_login_page() ) {
 
-	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'pilau-base', get_template_directory_uri() . '/js/pilau-base.js', array( 'jquery' ), '1.0' );
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_script( 'pilau-base', get_template_directory_uri() . '/js/pilau-base.js', array( 'jquery' ), '1.0' );
 
+	}
 }
 
 
@@ -81,14 +83,16 @@ function pilau_base_enqueue_scripts() {
  *
  * @since	Pilau_Base 0.1
  */
-if ( ! is_admin() && ! pilau_is_login_page() )
-	add_action( 'wp_enqueue_scripts', 'pilau_base_enqueue_styles', 1 );
+add_action( 'wp_enqueue_scripts', 'pilau_base_enqueue_styles', 1 );
 function pilau_base_enqueue_styles() {
+	// This test is done here because applying the test to the hook breaks due to pilau_is_login_page() not being defined yet...
+	if ( ! is_admin() && ! pilau_is_login_page() ) {
 
-	wp_enqueue_style( 'html5-reset', get_template_directory_uri() . '/styles/html5-reset.styles', array(), '1.0' );
-	wp_enqueue_style( 'wp-core', get_template_directory_uri() . '/styles/wp-core.styles', array(), '1.0' );
-	wp_enqueue_style( 'pilau-classes', get_template_directory_uri() . '/styles/classes.styles', array(), '1.0' );
+		wp_enqueue_style( 'html5-reset', get_template_directory_uri() . '/styles/html5-reset.styles', array(), '1.0' );
+		wp_enqueue_style( 'wp-core', get_template_directory_uri() . '/styles/wp-core.styles', array(), '1.0' );
+		wp_enqueue_style( 'pilau-classes', get_template_directory_uri() . '/styles/classes.styles', array(), '1.0' );
 
+	}
 }
 
 
