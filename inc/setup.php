@@ -88,9 +88,9 @@ function pilau_base_enqueue_styles() {
 	// This test is done here because applying the test to the hook breaks due to pilau_is_login_page() not being defined yet...
 	if ( ! is_admin() && ! pilau_is_login_page() ) {
 
-		wp_enqueue_style( 'html5-reset', get_template_directory_uri() . '/styles/html5-reset.styles', array(), '1.0' );
-		wp_enqueue_style( 'wp-core', get_template_directory_uri() . '/styles/wp-core.styles', array(), '1.0' );
-		wp_enqueue_style( 'pilau-classes', get_template_directory_uri() . '/styles/classes.styles', array(), '1.0' );
+		wp_enqueue_style( 'html5-reset', get_template_directory_uri() . '/styles/html5-reset.css', array(), '1.0' );
+		wp_enqueue_style( 'wp-core', get_template_directory_uri() . '/styles/wp-core.css', array(), '1.0' );
+		wp_enqueue_style( 'pilau-classes', get_template_directory_uri() . '/styles/classes.css', array(), '1.0' );
 
 	}
 }
