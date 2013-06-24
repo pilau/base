@@ -111,6 +111,10 @@ if ( ! defined( 'PILAU_SLUG_LENGTH' ) ) {
 
 /*
  * Constants not intended for configuration
+ *
+ * These are defined in the child theme functions.php, because that is loaded first, even
+ * though they are not intended to be changed. They may get used before this functions.php
+ * is loaded - but they are still defined here as a fall-back.
  */
 
 /**
@@ -191,5 +195,6 @@ require( dirname( __FILE__ ) . '/inc/wp-toolbar.php' );
  *
  * @since	Pilau_Base 0.1
  */
-if ( ! PILAU_FRONT_OR_AJAX )
+if ( ! PILAU_FRONT_OR_AJAX ) {
 	require( dirname( __FILE__ ) . '/inc/admin.php' );
+}

@@ -404,13 +404,13 @@ function pilau_base_admin_columns( $cols ) {
  * Disable default dashboard widgets
  *
  * @since	Pilau_Base 0.1
- * @link	http://digwp.com/2010/10/customize-wordpress-dashboard/
+ * @link	http://codex.wordpress.org/Dashboard_Widgets_API
  */
-add_action( 'admin_menu', 'pilau_base_disable_default_dashboard_widgets', 1 );
+add_action( 'wp_dashboard_setup', 'pilau_base_disable_default_dashboard_widgets', 1 );
 function pilau_base_disable_default_dashboard_widgets() {
 
 	if ( ! PILAU_USE_COMMENTS )
-		remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'core' );
+		remove_meta_box( 'dashboard_recent_comments', 'dashboard', 'normal' );
 
 }
 
