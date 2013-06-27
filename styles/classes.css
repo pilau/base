@@ -21,6 +21,10 @@ Image replacement basics - just add dimensions and an image!
 	white-space: nowrap;
 	overflow: hidden;
 }
+/* Anchors and spans inside image replacement elements are usually block */
+.img-rep a, .img-rep span {
+	display: block;
+}
 
 /* Misc */
 .clear { clear: both; }
