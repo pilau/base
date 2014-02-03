@@ -738,6 +738,34 @@ if ( ! function_exists( 'pilau_format_filesize' ) ) {
 }
 
 /**
+ * Make sure file type is simple
+ *
+ * @since	Pilau_Base 0.1
+ *
+ * @param	string	$type
+ * @return	string
+ */
+function pilau_simple_file_type( $type ) {
+	if ( strlen( $type ) > 4 ) {
+		switch ( strtolower( $type ) ) {
+			case 'vnd.openxmlformats-officedocument.wordprocessingml.document': {
+				$type = 'docx';
+				break;
+			}
+			case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': {
+				$type = 'xlsx';
+				break;
+			}
+			case 'application/vnd.openxmlformats-officedocument.presentationml.presentation': {
+				$type = 'pptx';
+				break;
+			}
+		}
+	}
+	return $type;
+}
+
+/**
  * Test for being on login page
  *
  * @link	http://stackoverflow.com/questions/5266945/wordpress-how-detect-if-current-page-is-the-login-page

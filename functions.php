@@ -145,6 +145,15 @@ if ( ! defined( 'PILAU_TOP_LEVEL_SLUG' ) ) {
 	define( 'PILAU_TOP_LEVEL_SLUG', reset( explode( '/', trim( $_SERVER['REQUEST_URI'], '/' ) ) ) );
 }
 
+/**
+ * Placeholder GIF URL (used for deferred loading of images)
+ *
+ * @since	Pilau_Base 0.1
+ */
+if ( ! defined( 'PILAU_PLACEHOLDER_GIF_URL' ) ) {
+	define( 'PILAU_PLACEHOLDER_GIF_URL', get_template_directory_uri() . '/img/placeholder.gif' );
+}
+
 
 /**
  * Set up theme
