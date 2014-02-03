@@ -321,6 +321,19 @@ if ( ! function_exists( 'pilau_obfuscate_email' ) ) {
 }
 
 /**
+ * Create a hyperlink for phone numbers
+ *
+ * @since	Pilau_Base 0.1
+ *
+ * @param	string		$number
+ * @param	string		$country_code
+ * @return	string
+ */
+function pilau_phone_link( $number, $country_code = '44' ) {
+	return 'tel:+' . $country_code .  preg_replace( '/[^0-9]/', '', ltrim( $number, 0 ) );
+}
+
+/**
  * Get an extract from a string, trimming by words or paragraphs
  *
  * @since	Pilau_Base 0.1
