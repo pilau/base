@@ -760,6 +760,18 @@ function pilau_simple_file_type( $type ) {
 				$type = 'pptx';
 				break;
 			}
+			case 'video/x-ms-wmv': {
+				$type = 'wmv';
+				break;
+			}
+			case 'video/mp4': {
+				$type = 'mp4';
+				break;
+			}
+			case 'video/quicktime': {
+				$type = 'mov';
+				break;
+			}
 		}
 	}
 	return $type;
