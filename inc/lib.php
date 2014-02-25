@@ -752,23 +752,19 @@ function pilau_simple_file_type( $type ) {
 				$type = 'docx';
 				break;
 			}
-			case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': {
+			case 'vnd.openxmlformats-officedocument.spreadsheetml.sheet': {
 				$type = 'xlsx';
 				break;
 			}
-			case 'application/vnd.openxmlformats-officedocument.presentationml.presentation': {
+			case 'vnd.openxmlformats-officedocument.presentationml.presentation': {
 				$type = 'pptx';
 				break;
 			}
-			case 'video/x-ms-wmv': {
+			case 'x-ms-wmv': {
 				$type = 'wmv';
 				break;
 			}
-			case 'video/mp4': {
-				$type = 'mp4';
-				break;
-			}
-			case 'video/quicktime': {
+			case 'quicktime': {
 				$type = 'mov';
 				break;
 			}
