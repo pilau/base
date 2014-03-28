@@ -748,26 +748,24 @@ if ( ! function_exists( 'pilau_format_filesize' ) ) {
 function pilau_simple_file_type( $type ) {
 	if ( strlen( $type ) > 4 ) {
 		switch ( strtolower( $type ) ) {
-			case 'vnd.openxmlformats-officedocument.wordprocessingml.document': {
-				$type = 'docx';
+			case 'vnd.openxmlformats-officedocument.wordprocessingml.document':
+			case 'application/msword':
+				$type = 'doc';
 				break;
-			}
-			case 'vnd.openxmlformats-officedocument.spreadsheetml.sheet': {
-				$type = 'xlsx';
+			case 'vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+			case 'application/vnd.ms-excel':
+				$type = 'xls';
 				break;
-			}
-			case 'vnd.openxmlformats-officedocument.presentationml.presentation': {
-				$type = 'pptx';
+			case 'vnd.openxmlformats-officedocument.presentationml.presentation':
+			case 'vnd.ms-powerpoint':
+				$type = 'ppt';
 				break;
-			}
-			case 'x-ms-wmv': {
+			case 'x-ms-wmv':
 				$type = 'wmv';
 				break;
-			}
-			case 'quicktime': {
+			case 'quicktime':
 				$type = 'mov';
 				break;
-			}
 		}
 	}
 	return $type;
