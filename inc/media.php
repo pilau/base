@@ -166,21 +166,33 @@ if ( ! function_exists( 'pilau_img_defer_load' ) ) {
  * @link	http://www.bobz.co/responsive-images-picturefill-wordpress-theme-development/
  *
  * @param	int		$image_id
- * @param	string	$size_suffix
+ * @param	string	$size_suffix	A suffix to prepend before the three generic image size names
+ * @param	array	$size_names		Instead of a suffix, three completely custom image size names
+ * 									can be supplied in this array. 3 size names should be supplied,
+ * 									each one smaller than the previous one.
  * @param	string	$alt
  * @param	array	$classes
  * @return	string
  */
 if ( ! function_exists( 'pilau_responsive_picture' ) ) {
-	function pilau_responsive_picture( $image_id, $size_suffix = '', $alt = null, $classes = array() ) {
+	function pilau_responsive_picture( $image_id, $size_suffix = '', $size_names = null, $alt = null, $classes = array() ) {
 		global $pilau_breakpoints;
 		$output = '';
 
-		// Try to get the 3 main sizes
+		// Determine size names
+		if ( ! is_array( $size_names ) || count( $size_names ) != 3 ) {
+			$size_names = array(
+				$size_suffix . 'large',
+				$size_suffix . 'medium',
+				$size_suffix . 'thumbnail',
+			);
+		}
+
+		// Try to get the images
 		$images = array(
-			'large'		=> pilau_get_image_url( $image_id, $size_suffix . 'large' ),
-			'medium'	=> pilau_get_image_url( $image_id, $size_suffix . 'medium' ),
-			'small'		=> pilau_get_image_url( $image_id, $size_suffix . 'thumbnail' )
+			'large'		=> pilau_get_image_url( $image_id, $size_names[0] ),
+			'medium'	=> pilau_get_image_url( $image_id, $size_names[1] ),
+			'small'		=> pilau_get_image_url( $image_id, $size_names[2] )
 		);
 
 		// Generate the markup
