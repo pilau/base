@@ -80,10 +80,10 @@ function pilau_base_enqueue_scripts() {
 	// This test is done here because applying the test to the hook breaks due to pilau_is_login_page() not being defined yet...
 	if ( ! is_admin() && ! pilau_is_login_page() ) {
 
-		wp_enqueue_script( 'jquery' );
-		wp_enqueue_script( 'pilau-base', get_template_directory_uri() . '/js/pilau-base.js', array( 'jquery' ), '1.0' );
+		wp_enqueue_script( 'jquery', false, array(), false, true );
+		wp_enqueue_script( 'pilau-base', get_template_directory_uri() . '/js/pilau-base.js', array( 'jquery' ), '1.0', true );
 		if ( PILAU_USE_PICTUREFILL ) {
-			wp_enqueue_script( 'picturefill', get_template_directory_uri() . '/js/picturefill.js', array(), '2.1.0' );
+			wp_enqueue_script( 'picturefill', get_template_directory_uri() . '/js/picturefill.js', array(), '2.1.0', true );
 		}
 
 	}
