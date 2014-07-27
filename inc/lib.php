@@ -749,23 +749,35 @@ function pilau_simple_file_type( $type ) {
 	if ( strlen( $type ) > 4 ) {
 		switch ( strtolower( $type ) ) {
 			case 'vnd.openxmlformats-officedocument.wordprocessingml.document':
-			case 'application/msword':
+			case 'application/msword': {
 				$type = 'doc';
 				break;
+			}
 			case 'vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-			case 'application/vnd.ms-excel':
+			case 'application/vnd.ms-excel': {
 				$type = 'xls';
 				break;
+			}
 			case 'vnd.openxmlformats-officedocument.presentationml.presentation':
-			case 'vnd.ms-powerpoint':
+			case 'vnd.ms-powerpoint': {
 				$type = 'ppt';
 				break;
-			case 'x-ms-wmv':
+			}
+			case 'x-ms-wmv': {
 				$type = 'wmv';
 				break;
-			case 'quicktime':
+			}
+			case 'quicktime': {
 				$type = 'mov';
 				break;
+			}
+			default: {
+			$type_parts = explode( '/', $type );
+			if ( count( $type_parts ) == 2 && $type_parts[0] == 'application' ) {
+				$type = $type_parts[1];
+			}
+			break;
+			}
 		}
 	}
 	return $type;
