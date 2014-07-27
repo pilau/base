@@ -15,7 +15,7 @@
  */
 add_action( 'after_setup_theme', 'pilau_base_setup', 1 );
 function pilau_base_setup() {
-	global $pilau_base_options;
+	global $pilau_base_options, $pilau_breakpoints;
 
 	/*
 	 * Theme options (not settings page)
@@ -31,6 +31,20 @@ function pilau_base_setup() {
 			'settings_nag_dismissed'	=> false
 		);
 		update_option( 'pilau_base_options', $pilau_base_options );
+
+	}
+
+	/*
+	 * Responsive stuff
+	 */
+
+	// These breakpoints are currently used for responsive image sizes with Picturefill
+	if ( ! is_array( $pilau_breakpoints ) ) {
+
+		$pilau_breakpoints = array(
+			'large'		=> '1000px', // This and above is "large"
+			'medium'	=> '640px', // This and above is "medium"; below is "small"
+		);
 
 	}
 
@@ -68,6 +82,9 @@ function pilau_base_enqueue_scripts() {
 
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_script( 'pilau-base', get_template_directory_uri() . '/js/pilau-base.js', array( 'jquery' ), '1.0' );
+		if ( PILAU_USE_PICTUREFILL ) {
+			wp_enqueue_script( 'picturefill', get_template_directory_uri() . '/js/picturefill.js', array(), '2.1.0' );
+		}
 
 	}
 }

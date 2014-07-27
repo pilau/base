@@ -109,6 +109,15 @@ if ( ! defined( 'PILAU_SLUG_LENGTH' ) ) {
 	define( 'PILAU_SLUG_LENGTH', 8 );
 }
 
+/**
+ * Use Picturefill for responsive images?
+ *
+ * @since	Pilau_Base 0.1
+ */
+if ( ! defined( 'PILAU_USE_PICTUREFILL' ) ) {
+	define( 'PILAU_USE_PICTUREFILL', false );
+}
+
 /*
  * Constants not intended for configuration
  *

@@ -156,3 +156,49 @@ if ( ! function_exists( 'pilau_img_defer_load' ) ) {
 
 	}
 }
+
+
+/**
+ * Ouput an image using the <picture> element for responsive sizes
+ *
+ * @since	Pilau_Base 0.1
+ * @link	http://scottjehl.github.io/picturefill/
+ * @link	http://www.bobz.co/responsive-images-picturefill-wordpress-theme-development/
+ *
+ * @param	int		$image_id
+ * @param	string	$size_suffix
+ * @param	string	$alt
+ * @param	array	$classes
+ * @return	void
+ */
+if ( ! function_exists( 'pilau_responsive_picture' ) ) {
+	function pilau_responsive_picture( $image_id, $size_suffix = '', $alt = null, $classes = array() ) {
+		global $pilau_breakpoints;
+
+		// Try to get the 3 main sizes
+		$images = array(
+			'large'		=> pilau_get_image_url( $image_id, $size_suffix . 'large' ),
+			'medium'	=> pilau_get_image_url( $image_id, $size_suffix . 'medium' ),
+			'small'		=> pilau_get_image_url( $image_id, $size_suffix . 'thumbnail' )
+		);
+
+		// Output the markup
+		?>
+		<picture class="<?php echo implode( ' ', $classes ); ?>">
+			<!--[if IE 9]><video style="display: none;"><![endif]-->
+			<?php
+			// Go through the breakpoints
+			foreach ( $pilau_breakpoints as $size_name => $width ) {
+				if ( $images[ $size_name ] ) { ?><source srcset="<?php echo $images[ $size_name ]; ?>" media="(min-width: <?php echo $width; ?>)">
+				<?php }
+			}
+			// Add the final "small" size
+			?>
+			<source srcset="<?php echo $images['small']; ?>">
+			<!--[if IE 9]></video><![endif]-->
+			<img srcset="<?php echo $images['small']; ?>" alt="<?php echo $alt; ?>">
+		</picture>
+		<?php
+
+	}
+}
