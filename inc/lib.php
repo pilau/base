@@ -742,45 +742,64 @@ if ( ! function_exists( 'pilau_format_filesize' ) ) {
  *
  * @since	Pilau_Base 0.1
  *
- * @param	string	$type
+ * @param	mixed	$type
  * @return	string
  */
 function pilau_simple_file_type( $type ) {
-	if ( strlen( $type ) > 4 ) {
-		switch ( strtolower( $type ) ) {
-			case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-			case 'application/msword': {
-				$type = 'doc';
-				break;
-			}
-			case 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
-			case 'application/vnd.ms-excel': {
-				$type = 'xls';
-				break;
-			}
-			case 'application/vnd.openxmlformats-officedocument.presentationml.presentation':
-			case 'application/vnd.ms-powerpoint': {
-				$type = 'ppt';
-				break;
-			}
-			case 'video/x-ms-wmv': {
-				$type = 'wmv';
-				break;
-			}
-			case 'video/quicktime': {
-				$type = 'mov';
-				break;
-			}
-			default: {
-			$type_parts = explode( '/', $type );
-			if ( count( $type_parts ) == 2 && $type_parts[0] == 'application' ) {
-				$type = $type_parts[1];
+	$type_simple = '';
+
+	// Initialize
+	if ( is_array( $type ) ) {
+		$type_generic = $type[0]; // Generic, e.g. 'text'
+		$type_specific = $type[1]; // Specific, e.g. 'html'
+	} else {
+		$type_generic = '';
+		$type_specific = $type;
+	}
+
+	switch ( $type_generic ) {
+		case 'audio':
+			switch ( strtolower( $type_specific ) ) {
+				case 'mpeg':
+					$type_simple = 'mp3';
+					break;
+				default:
+					$type_simple = $type_specific;
+					break;
 			}
 			break;
+		default:
+			if ( strlen( $type_specific ) > 4 ) {
+				switch ( strtolower( $type_specific ) ) {
+					case 'vnd.openxmlformats-officedocument.wordprocessingml.document':
+					case 'application/msword':
+						$type_simple = 'doc';
+						break;
+					case 'vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+					case 'application/vnd.ms-excel':
+						$type_simple = 'xls';
+						break;
+					case 'vnd.openxmlformats-officedocument.presentationml.presentation':
+					case 'vnd.ms-powerpoint':
+						$type_simple = 'ppt';
+						break;
+					case 'x-ms-wmv':
+						$type_simple = 'wmv';
+						break;
+					case 'quicktime':
+						$type_simple = 'mov';
+						break;
+					default:
+						$type_simple = $type_specific;
+						break;
+				}
+			} else {
+				$type_simple = $type_specific;
 			}
-		}
+			break;
 	}
-	return $type;
+
+	return $type_simple;
 }
 
 /**
