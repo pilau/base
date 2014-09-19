@@ -75,9 +75,9 @@ if ( PILAU_IGNORE_UPDATES_FOR_INACTIVE_PLUGINS ) {
 	add_filter( 'http_request_args', 'pilau_ignore_updates_for_inactive_plugins', 10, 2 );
 	function pilau_ignore_updates_for_inactive_plugins( $r, $url ) {
 		if ( 0 === strpos( $url, 'http://api.wordpress.org/plugins/update-check/' ) ) {
-			$plugins = unserialize( $r['body']['plugins'] );
-			$plugins->plugins = array_intersect_key( $plugins->plugins, array_flip( $plugins->active ) );
-			$r['body']['plugins'] = serialize( $plugins );
+			$plugins = json_decode( $r['body']['plugins'], true );
+			$plugins['plugins'] = array_intersect_key( $plugins['plugins'], array_flip( $plugins['active'] ) );
+			$r['body']['plugins'] = json_encode( $plugins );
 		}
 		return $r;
 	}
