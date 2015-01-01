@@ -1,8 +1,8 @@
 Pilau Base
 =======
 
-* This is a parent framework theme for creating custom WordPress sites.
-* It is intended for use with the child theme [Pilau Starter](https://github.com/pilau/starter).
+* This is a parent theme for creating custom WordPress sites.
+* It's intended for use with the child theme [Pilau Starter](https://github.com/pilau/starter).
 
 Neither Starter nor Base can be used "out of the box"! There are barely any styles, and many things need to be initialized.
 

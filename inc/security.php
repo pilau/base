@@ -4,28 +4,29 @@
  * Security functions
  *
  * @package	Pilau_Base
- * @since	0.1
+ * @since	0.2
  */
 
 
 /**
  * Block attempted comments without a referrer
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  * @uses	wp_die()
  */
 if ( ! function_exists( 'pilau_check_referrer' ) ) {
 	add_action( 'check_comment_flood', 'pilau_check_referrer' );
 	function pilau_check_referrer() {
-		if ( ! isset( $_SERVER['HTTP_REFERER'] ) || $_SERVER['HTTP_REFERER'] == "" )
+		if ( ! isset( $_SERVER['HTTP_REFERER'] ) || $_SERVER['HTTP_REFERER'] == "" ) {
 			wp_die( __( 'Please enable referrers in your browser.' ) );
+		}
 	}
 }
 
 /**
  * Block malicious requests
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  * @link	http://perishablepress.com/press/2009/12/22/protect-wordpress-against-malicious-url-requests/
  * @uses	is_user_logged_in()
  */
@@ -46,7 +47,7 @@ if ( ! function_exists( 'pilau_block_malicious_requests' ) ) {
 /**
  * Remove WP version from RSS
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  */
 if ( ! function_exists( 'pilau_rss_version' ) ) {
 	add_filter( 'the_generator', 'pilau_rss_version' );

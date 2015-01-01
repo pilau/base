@@ -4,15 +4,16 @@
  * WordPress Toolbar customization (formerly admin bar)
  *
  * @package	Pilau_Base
- * @since	0.1
+ * @since	0.2
  * @link	http://www.sitepoint.com/change-wordpress-33-toolbar/
  */
 add_action( 'admin_bar_menu', 'pilau_base_customize_toolbar', 10000 );
 function pilau_base_customize_toolbar( $toolbar ) {
 
 	/* Remove comments? */
-	if ( ! PILAU_USE_COMMENTS )
+	if ( ! PILAU_USE_COMMENTS ) {
 		$toolbar->remove_node( 'comments' );
+	}
 
 	/* For the front-end  */
 	if ( ! is_admin() ) {

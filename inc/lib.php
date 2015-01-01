@@ -4,7 +4,7 @@
  * Library of general helper functions
  *
  * @package	Pilau_Base
- * @since	0.1
+ * @since	0.2
  */
 
 
@@ -14,7 +14,7 @@
 /**
  * Better default display name for users
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @uses	get_user_meta()
  * @uses	wp_update_user()
@@ -130,8 +130,9 @@ if ( ! function_exists( 'pilau_objects_array_values' ) ) {
 		// Iterate through our haystack
 		foreach ( $haystack as $object ) {
 			// Ensure this array element is an object and has a key that matches our needle's key
-			if ( is_object( $object ) && property_exists( $object, $needle_key ) )
+			if ( is_object( $object ) && property_exists( $object, $needle_key ) ) {
 				$values[] = $object->$needle_key;
+			}
 		}
 		return $values;
 	}
@@ -159,11 +160,13 @@ if ( ! function_exists( 'pilau_search_object_array' ) ) {
 			if ( is_object( $value ) && property_exists( $value, $needle_key ) ) {
 				// Case-insensitive comparison?
 				if ( $case_sensitive ) {
-					if ( strcmp( $needle_val, $value->$needle_key ) == 0 )
+					if ( strcmp( $needle_val, $value->$needle_key ) == 0 ) {
 						return $i;
+					}
 				} else {
-					if ( strcasecmp( $needle_val, $value->$needle_key ) == 0 )
+					if ( strcasecmp( $needle_val, $value->$needle_key ) == 0 ) {
 						return $i;
+					}
 				}
 			}
 		}
@@ -205,8 +208,9 @@ if ( ! function_exists( 'pilau_search_arrays_in_array' ) ) {
 	function pilau_search_arrays_in_array( $needle, $haystack ) {
 		if ( is_array( $haystack ) ) {
 			foreach ( $haystack as $key => $value ) {
-				if ( is_array( $value ) && array_search( $needle, $value ) !== false )
+				if ( is_array( $value ) && array_search( $needle, $value ) !== false ) {
 					return $key;
+				}
 			}
 		}
 		return false;
@@ -269,7 +273,7 @@ if ( ! function_exists( 'pilau_explode_constants' ) ) {
 /**
  * Email obfuscator
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @link	http://bla.st/
  * @link	http://macromates.com/
@@ -286,8 +290,9 @@ if ( ! function_exists( 'pilau_obfuscate_text' ) ) {
 		$new_string = str_replace( '"', '\\"', $new_string ); // escape doublequotes
 		$new_string = str_replace( '.', '\056', $new_string ); // swap the dots with javascript . characters
 		$result = '<script type="text/javascript">document.write("' . $new_string . '".replace(/[a-zA-Z]/g, function(c){return String.fromCharCode((c<="Z"?90:122)>=(c=c.charCodeAt(0)+13)?c:c-26);}));</script>';
-		if ( $noscript_contact )
+		if ( $noscript_contact ) {
 			$result .= '<noscript><a href="' . esc_url( $noscript_contact ) . '">' . __( 'Our contact form' ) . '</a></noscript>';
+		}
 		return $result;
 	}
 }
@@ -295,7 +300,7 @@ if ( ! function_exists( 'pilau_obfuscate_text' ) ) {
 /**
  * Given an email address, creates a nice obfuscated <a href="mailto:email">email</a> style address
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  * @uses	pilau_obfuscate_text()
  * @param	string	$email
  * @param	bool	$icon
@@ -306,15 +311,19 @@ if ( ! function_exists( 'pilau_obfuscate_text' ) ) {
  */
 if ( ! function_exists( 'pilau_obfuscate_email' ) ) {
 	function pilau_obfuscate_email( $email, $icon = true, $at_sign = "@", $text = "", $classes = array() ) {
-		if ( $at_sign != "@" )
+		if ( $at_sign != "@" ) {
 			$email = str_replace( $at_sign, "@", $email );
-		if ( ! $text )
+		}
+		if ( ! $text ) {
 			$text = $email;
+		}
 		$string = '<a href="mailto:' . esc_attr( $email ) . '"';
-		if ( ! $icon )
+		if ( ! $icon ) {
 			$classes[] = 'no-icon';
-		if ( $classes )
+		}
+		if ( $classes ) {
 			$string .= ' class="' . implode( " ", $classes ) . '"';
+		}
 		$string .= '>' . wp_kses( $text, array() ) .'</a>';
 		return pilau_obfuscate_text( $string );
 	}
@@ -323,7 +332,7 @@ if ( ! function_exists( 'pilau_obfuscate_email' ) ) {
 /**
  * Create a hyperlink for phone numbers
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @param	string		$number
  * @param	string		$country_code
@@ -336,7 +345,7 @@ function pilau_phone_link( $number, $country_code = '44' ) {
 /**
  * Get an extract from a string, trimming by words or paragraphs
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @uses	strip_shortcodes()
  * @uses	do_shortcode()
@@ -382,7 +391,7 @@ if ( ! function_exists( 'pilau_extract' ) ) {
 /**
  * Get the current URL
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @uses	trailingslashit()
  *
@@ -432,12 +441,14 @@ if ( ! function_exists( 'pilau_get_current_url' ) ) {
 		}
 
 		// Put query string back?
-		if ( $keep_qs && $qs )
+		if ( $keep_qs && $qs ) {
 			$url .= '?' . $qs;
+		}
 
 		// Trim leading slash if a relative path
-		if ( $return_path )
+		if ( $return_path ) {
 			$url = ltrim( $url, '/' );
+		}
 
 		return $url;
 	}
@@ -446,7 +457,7 @@ if ( ! function_exists( 'pilau_get_current_url' ) ) {
 /**
  * Return a path from a URL
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @uses	pilau_get_current_url()
  *
@@ -455,8 +466,9 @@ if ( ! function_exists( 'pilau_get_current_url' ) ) {
  */
 if ( ! function_exists( 'pilau_path_from_url' ) ) {
 	function pilau_path_from_url( $url = null ) {
-		if ( $url === null )
+		if ( $url === null ) {
 			return pilau_get_current_url( false, true, true );
+		}
 		$url_parts = parse_url( $url );
 		return trim( $url_parts['path'], '/' );
 	}
@@ -465,7 +477,7 @@ if ( ! function_exists( 'pilau_path_from_url' ) ) {
 /**
  * Wrapper that extends the core url_to_postid() function
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @uses	url_to_postid()
  * @uses	get_post_types()
@@ -499,8 +511,9 @@ if ( ! function_exists( 'pilau_url_to_postid' ) ) {
 						'name'				=> $slug,
 						'posts_per_page'	=> 1
 					));
-					if ( is_object( $query->post ) )
+					if ( is_object( $query->post ) ) {
 						$post_id = $query->post->ID;
+					}
 					// Reset loop
 					wp_reset_postdata();
 				}
@@ -515,7 +528,7 @@ if ( ! function_exists( 'pilau_url_to_postid' ) ) {
 /**
  * Get URL of an image
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @uses	wp_get_attachment_image_src()
  *
@@ -533,7 +546,7 @@ if ( ! function_exists( 'pilau_get_image_url' ) ) {
 /**
  * Get URL of a post's featured image
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @uses	pilau_get_image_url()
  * @uses	get_post_thumbnail_id()
@@ -553,7 +566,7 @@ if ( ! function_exists( 'pilau_get_featured_image_url' ) ) {
 /**
  * Construct URL for website based on user ID
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  * @param	string	$website	'facebook' | 'twitter' | 'google+' | 'pinterest' | 'linkedin' | 'youtube' | 'instagram' | 'foursquare'
  * @param	string	$id
  * @return	string
@@ -620,7 +633,7 @@ if ( ! function_exists( 'pilau_construct_website_url' ) ) {
  *
  * @link	http://stackoverflow.com/questions/1960461/convert-plain-text-urls-into-html-hyperlinks-in-php
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @param	string	$s
  * @return	string
@@ -638,7 +651,7 @@ if ( ! function_exists( 'pilau_link_urls' ) ) {
 /**
  * Get nav menu without markup containers
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @uses	wp_nav_menu()
  *
@@ -669,7 +682,7 @@ if ( ! function_exists( 'pilau_menu_without_containers' ) ) {
 /**
  * Is a plugin installed?
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @uses	$pilau_wp_plugins
  *
@@ -740,7 +753,7 @@ if ( ! function_exists( 'pilau_format_filesize' ) ) {
 /**
  * Make sure file type is simple
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @param	mixed	$type
  * @return	string
@@ -807,7 +820,7 @@ function pilau_simple_file_type( $type ) {
  *
  * @link	http://stackoverflow.com/questions/5266945/wordpress-how-detect-if-current-page-is-the-login-page
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @return	bool
  */

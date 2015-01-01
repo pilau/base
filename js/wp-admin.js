@@ -6,7 +6,7 @@
 /**
  * Warning flag for changed forms
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  */
 var pilau_form_warning = false;
 
@@ -21,7 +21,7 @@ jQuery( document ).ready( function( $ ) {
 	 * If the form's hidden fields are changed dynamically, they need to trigger the
 	 * change event specifically, e.g. $( 'input#id' ).val( 'test' ).trigger( 'change' )
 	 *
-	 * @since	Pilau_Base 0.1
+	 * @since	Pilau_Base 0.2
 	 */
 	if ( fwic.length ) {
 		$( ':input', fwic ).on( 'change', function() {

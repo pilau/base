@@ -4,14 +4,14 @@
  * Content functionality
  *
  * @package	Pilau_Base
- * @since	0.1
+ * @since	0.2
  */
 
 
 /**
  * Custom handling of content output
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  * @uses	get_the_content()
  * @uses	pilau_extract()
  * @uses	get_the_excerpt()
@@ -25,8 +25,9 @@
  */
 if ( ! function_exists( 'pilau_content' ) ) {
 	function pilau_content( $content = null, $action = "extract", $strip_imgs = true, $paras = 1, $filter = true ) {
-		if ( is_null( $content ) )
+		if ( is_null( $content ) ) {
 			$content = get_the_content();
+		}
 		$more = '<!--more-->';
 		$more_pos = strpos( $content, $more );
 
@@ -63,8 +64,9 @@ if ( ! function_exists( 'pilau_content' ) ) {
 
 		}
 
-		if ( $filter )
+		if ( $filter ) {
 			$content = apply_filters( "the_content", $content );
+		}
 
 		return $content;
 	}
@@ -77,7 +79,7 @@ if ( ! function_exists( 'pilau_content' ) ) {
  * If there's a description set by Yoast SEO or Developer's Custom Fields, returns
  * that; otherwise, returns a content extract. Content is always tidied up, i.e. no HTML tags.
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  * @uses	slt_cf_field_value()
  * @uses	get_post()
  * @uses	pilau_extract()
@@ -93,10 +95,12 @@ if ( ! function_exists( 'pilau_content' ) ) {
  */
 if ( ! function_exists( 'pilau_description_or_extract' ) ) {
 	function pilau_description_or_extract( $post_id, $description = '', $post_content = '', $maxwords = 30 ) {
-		if ( function_exists( 'wpseo_get_value' ) && ! $description )
+		if ( function_exists( 'wpseo_get_value' ) && ! $description ) {
 			$description = wpseo_get_value( 'metadesc', $post_id );
-		if ( function_exists( 'slt_cf_field_value' ) && ! $description )
+		}
+		if ( function_exists( 'slt_cf_field_value' ) && ! $description ) {
 			$description = slt_cf_field_value( 'description', 'post', $post_id );
+		}
 		if ( ! $description ) {
 			if ( ! $post_content ) {
 				$post_data = get_post( $post_id );
@@ -105,8 +109,9 @@ if ( ! function_exists( 'pilau_description_or_extract' ) ) {
 			$post_content = strip_shortcodes( $post_content );
 			$post_content = trim( strip_tags( $post_content ) );
 			$description = $post_content;
-			if ( $maxwords )
+			if ( $maxwords ) {
 				$description = pilau_extract( $description, $maxwords );
+			}
 		}
 		return $description;
 	}
@@ -116,15 +121,16 @@ if ( ! function_exists( 'pilau_description_or_extract' ) ) {
 /**
  * "Not found" fragment
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @param	string	$title
  * @return	void
  */
 if ( ! function_exists( 'pilau_not_found' ) ) {
 	function pilau_not_found( $title = null ) {
-		if ( ! $title )
+		if ( ! $title ) {
 			$title = __( 'Content not found' );
+		}
 		?>
 
 		<article id="post-0" class="post error404 not-found" role="article">
@@ -143,7 +149,7 @@ if ( ! function_exists( 'pilau_not_found' ) ) {
  *
  * To be hooked as a filter onto wp_title when needed.
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @param	string	$title
  * @param	string	$sep

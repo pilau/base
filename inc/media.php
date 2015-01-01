@@ -4,22 +4,24 @@
  * Media functions
  *
  * @package	Pilau_Base
- * @since	0.1
+ * @since	0.2
  */
 
 
 /**
  * Add wmode parameter to Flash embeds to avoid z-index issue
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  */
 if ( ! function_exists( 'pilau_wmode_opaque' ) ) {
 	add_filter( 'oembed_result', 'pilau_wmode_opaque', 10, 3 );
 	function pilau_wmode_opaque( $html, $url, $args ) {
-		if ( strpos( $html, '<param name="movie"' ) !== false )
+		if ( strpos( $html, '<param name="movie"' ) !== false ) {
 			$html = preg_replace( '|</param>|', '</param><param name="wmode" value="opaque"></param>', $html, 1 );
-		if ( strpos( $html, '<embed' ) !== false )
+		}
+		if ( strpos( $html, '<embed' ) !== false ) {
 			$html = str_replace( '<embed', '<embed wmode="opaque"', $html );
+		}
 		return $html;
 	}
 }
@@ -28,7 +30,7 @@ if ( ! function_exists( 'pilau_wmode_opaque' ) ) {
 /**
  * Try to output a video or an image
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @uses	wp_oembed_get()
  * @uses	esc_url()
@@ -55,7 +57,7 @@ if ( ! function_exists( 'pilau_video_or_image' ) ) {
 /**
  * Output an image with optional caption, using <figure> and <figcaption> tags
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  *
  * @param	int				$image_id		ID of the image
  * @param	string			$size			Size of the image; defaults to 'post-thumbnail'
@@ -70,31 +72,36 @@ if ( ! function_exists( 'pilau_image_maybe_caption' ) ) {
 	function pilau_image_maybe_caption( $image_id, $size = 'post-thumbnail', $alt = null, $fig_class = null, $fig_id = null, $link = null, $defer = false ) {
 
 		// Try to get image
-		if ( ! is_int( $image_id ) && ! ctype_digit( $image_id ) )
+		if ( ! is_int( $image_id ) && ! ctype_digit( $image_id ) ) {
 			return;
+		}
 		$image = get_post( $image_id );
-		if ( ! $image )
+		if ( ! $image ) {
 			return;
+		}
 
 		// Initialize
 		$fig_class = (array) $fig_class;
 
 		// Start output
 		echo '<figure class="' . esc_attr( implode( ' ', $fig_class ) ) . '"';
-		if ( $fig_id )
+		if ( $fig_id ) {
 			echo ' id="' . esc_attr( $fig_id ) . '"';
+		}
 		echo '>';
 
 		// Link?
-		if ( $link )
+		if ( $link ) {
 			echo '<a href="' . esc_url( $link ) . '">';
+		}
 
 		// Image
 		pilau_img_defer_load( $image_id, $size, $alt, array(), $defer );
 
 		// Link?
-		if ( $link )
+		if ( $link ) {
 			echo '</a>';
+		}
 
 		// Caption?
 		if ( $image->post_excerpt ) {
@@ -110,7 +117,7 @@ if ( ! function_exists( 'pilau_image_maybe_caption' ) ) {
 /**
  * Ouput an image, with optional deferred loading
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  * @link	http://24ways.org/2010/speed-up-your-site-with-delayed-content/
  *
  * @param	mixed	$image	Either an attachment ID, or an array with 'width', 'height', 'src'
@@ -161,7 +168,7 @@ if ( ! function_exists( 'pilau_img_defer_load' ) ) {
 /**
  * Generate image markup using the <picture> element for responsive sizes
  *
- * @since	Pilau_Base 0.1
+ * @since	Pilau_Base 0.2
  * @link	http://scottjehl.github.io/picturefill/
  * @link	http://www.bobz.co/responsive-images-picturefill-wordpress-theme-development/
  *
