@@ -6,7 +6,7 @@
 /**
  * Get a part of a string
  *
- * @since	Pilau_Starter 0.1
+ * @since	[[theme-phpdoc-name]] 0.1
  * @param	{string}		s		The string
  * @param	{number|string}	i		The numeric index, or 'first' or 'last' (default 'last')
  * @param	{string}		sep		The character used a separator in the passed string (default '-')
