@@ -10,20 +10,6 @@
 
 
 /**
- * Admin scripts and styles
- *
- * @since	Pilau_Base 0.2
- */
-add_action( 'admin_enqueue_scripts', 'pilau_base_admin_enqueue_scripts_styles', 1 );
-function pilau_base_admin_enqueue_scripts_styles() {
-
-	wp_enqueue_style( 'pilau-base-admin-css', get_template_directory_uri() . '/styles/wp-admin.css', array(), '1.0' );
-	wp_enqueue_script( 'pilau-base-admin-js', get_template_directory_uri() . '/js/wp-admin.js', array(), '1.0' );
-
-}
-
-
-/**
  * Admin notices
  *
  * @since	Pilau_Base 0.2

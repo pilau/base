@@ -4,8 +4,6 @@ Pilau Base
 * This is a parent theme for creating custom WordPress sites.
 * It's intended for use with the child theme [Pilau Starter](https://github.com/pilau/starter).
 
-Neither Starter nor Base can be used "out of the box"! There are barely any styles, and many things need to be initialized.
-
 [Pilau](http://pilaubase.com/) is a suite of tools for creating custom WordPress sites created by developers working with the agency [Public Life](http://www.publiclife.co.uk/), is heavily focused on client work there, and is designed as a bare-bones starting point for our projects.
 
 However, we're very happy if anyone finds our work of use! If you feel like contributing, even better.
