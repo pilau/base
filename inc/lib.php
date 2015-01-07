@@ -701,6 +701,21 @@ if ( ! function_exists( 'pilau_is_plugin_installed' ) ) {
 *****************************************************************************/
 
 /**
+ * Update an option in a serialized option
+ *
+ * @since	0.2
+ * @param	string	$option
+ * @param	string	$key
+ * @param	mixed	$value
+ * @return	bool
+ */
+function pilau_update_seralized_option( $option, $key, $value ) {
+	$temp = get_option( $option );
+	$temp[ $key ] = $value;
+	return update_option( $option, $temp );
+}
+
+/**
  * Remove magic quotes slashes
  *
  * @since 0.1
