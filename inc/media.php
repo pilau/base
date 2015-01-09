@@ -8,12 +8,12 @@
  */
 
 
-/**
- * Add wmode parameter to Flash embeds to avoid z-index issue
- *
- * @since	Pilau_Base 0.2
- */
 if ( ! function_exists( 'pilau_wmode_opaque' ) ) {
+	/**
+	 * Add wmode parameter to Flash embeds to avoid z-index issue
+	 *
+	 * @since	Pilau_Base 0.2
+	 */
 	add_filter( 'oembed_result', 'pilau_wmode_opaque', 10, 3 );
 	function pilau_wmode_opaque( $html, $url, $args ) {
 		if ( strpos( $html, '<param name="movie"' ) !== false ) {
@@ -27,20 +27,20 @@ if ( ! function_exists( 'pilau_wmode_opaque' ) ) {
 }
 
 
-/**
- * Try to output a video or an image
- *
- * @since	Pilau_Base 0.2
- *
- * @uses	wp_oembed_get()
- * @uses	esc_url()
- * @uses	esc_attr()
- *
- * @param	string	$url	URL, perhaps an image, perhaps a video embed URL
- * @param	string	$alt	Alt text for an image
- * @return	string
- */
 if ( ! function_exists( 'pilau_video_or_image' ) ) {
+	/**
+	 * Try to output a video or an image
+	 *
+	 * @since	Pilau_Base 0.2
+	 *
+	 * @uses	wp_oembed_get()
+	 * @uses	esc_url()
+	 * @uses	esc_attr()
+	 *
+	 * @param	string	$url	URL, perhaps an image, perhaps a video embed URL
+	 * @param	string	$alt	Alt text for an image
+	 * @return	string
+	 */
 	function pilau_video_or_image( $url, $alt = '' ) {
 		$url_parts = parse_url( $url );
 		if ( $url_parts['host'] == $_SERVER['HTTP_HOST'] && file_exists( ABSPATH . trim( $url_parts['path'], '/' ) ) ) {
@@ -54,21 +54,21 @@ if ( ! function_exists( 'pilau_video_or_image' ) ) {
 }
 
 
-/**
- * Output an image with optional caption, using <figure> and <figcaption> tags
- *
- * @since	Pilau_Base 0.2
- *
- * @param	int				$image_id		ID of the image
- * @param	string			$size			Size of the image; defaults to 'post-thumbnail'
- * @param	string			$alt			Alternate text for the image; defaults to image alt or post title
- * @param	array|string	$fig_class		Class(es) for the <figure> tag
- * @param	string			$fig_id			ID for the <figure> tag
- * @param	string			$link			Optional link to wrap around image
- * @param	bool			$defer			Optional deferred loading
- * @return	void
- */
 if ( ! function_exists( 'pilau_image_maybe_caption' ) ) {
+	/**
+	 * Output an image with optional caption, using <figure> and <figcaption> tags
+	 *
+	 * @since	Pilau_Base 0.2
+	 *
+	 * @param	int				$image_id		ID of the image
+	 * @param	string			$size			Size of the image; defaults to 'post-thumbnail'
+	 * @param	string			$alt			Alternate text for the image; defaults to image alt or post title
+	 * @param	array|string	$fig_class		Class(es) for the <figure> tag
+	 * @param	string			$fig_id			ID for the <figure> tag
+	 * @param	string			$link			Optional link to wrap around image
+	 * @param	bool			$defer			Optional deferred loading
+	 * @return	void
+	 */
 	function pilau_image_maybe_caption( $image_id, $size = 'post-thumbnail', $alt = null, $fig_class = null, $fig_id = null, $link = null, $defer = false ) {
 
 		// Try to get image
@@ -114,19 +114,19 @@ if ( ! function_exists( 'pilau_image_maybe_caption' ) ) {
 }
 
 
-/**
- * Ouput an image, with optional deferred loading
- *
- * @since	Pilau_Base 0.2
- * @link	http://24ways.org/2010/speed-up-your-site-with-delayed-content/
- *
- * @param	mixed	$image	Either an attachment ID, or an array with 'width', 'height', 'src'
- * @param	string	$size	Size of the image (if attachment ID is passed); defaults to 'post-thumbnail'
- * @param	string	$alt	Alternate text for the image; defaults to image alt or post title
- * @param	bool	$defer	Defaults to false
- * @return	void
- */
 if ( ! function_exists( 'pilau_img_defer_load' ) ) {
+	/**
+	 * Ouput an image, with optional deferred loading
+	 *
+	 * @since	Pilau_Base 0.2
+	 * @link	http://24ways.org/2010/speed-up-your-site-with-delayed-content/
+	 *
+	 * @param	mixed	$image	Either an attachment ID, or an array with 'width', 'height', 'src'
+	 * @param	string	$size	Size of the image (if attachment ID is passed); defaults to 'post-thumbnail'
+	 * @param	string	$alt	Alternate text for the image; defaults to image alt or post title
+	 * @param	bool	$defer	Defaults to false
+	 * @return	void
+	 */
 	function pilau_img_defer_load( $image, $size = 'post-thumbnail', $alt = null, $class = array(), $defer = false ) {
 
 		// Initialize
@@ -165,23 +165,23 @@ if ( ! function_exists( 'pilau_img_defer_load' ) ) {
 }
 
 
-/**
- * Generate image markup using the <picture> element for responsive sizes
- *
- * @since	Pilau_Base 0.2
- * @link	http://scottjehl.github.io/picturefill/
- * @link	http://www.bobz.co/responsive-images-picturefill-wordpress-theme-development/
- *
- * @param	int		$image_id
- * @param	string	$size_suffix	A suffix to prepend before the three generic image size names
- * @param	array	$size_names		Instead of a suffix, three completely custom image size names
- * 									can be supplied in this array. 3 size names should be supplied,
- * 									each one smaller than the previous one.
- * @param	string	$alt
- * @param	array	$classes
- * @return	string
- */
 if ( ! function_exists( 'pilau_responsive_picture' ) ) {
+	/**
+	 * Generate image markup using the <picture> element for responsive sizes
+	 *
+	 * @since	Pilau_Base 0.2
+	 * @link	http://scottjehl.github.io/picturefill/
+	 * @link	http://www.bobz.co/responsive-images-picturefill-wordpress-theme-development/
+	 *
+	 * @param	int		$image_id
+	 * @param	string	$size_suffix	A suffix to prepend before the three generic image size names
+	 * @param	array	$size_names		Instead of a suffix, three completely custom image size names
+	 * 									can be supplied in this array. 3 size names should be supplied,
+	 * 									each one smaller than the previous one.
+	 * @param	string	$alt
+	 * @param	array	$classes
+	 * @return	string
+	 */
 	function pilau_responsive_picture( $image_id, $size_suffix = '', $size_names = null, $alt = null, $classes = array() ) {
 		global $pilau_breakpoints;
 		$output = '';

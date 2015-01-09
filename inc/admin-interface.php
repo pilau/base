@@ -70,13 +70,13 @@ function pilau_base_admin_columns( $cols ) {
 }
 
 
+add_action( 'wp_dashboard_setup', 'pilau_base_disable_default_dashboard_widgets', 1 );
 /**
  * Disable default dashboard widgets
  *
  * @since	Pilau_Base 0.2
  * @link	http://codex.wordpress.org/Dashboard_Widgets_API
  */
-add_action( 'wp_dashboard_setup', 'pilau_base_disable_default_dashboard_widgets', 1 );
 function pilau_base_disable_default_dashboard_widgets() {
 
 	if ( ! PILAU_USE_COMMENTS ) {

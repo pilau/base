@@ -12,16 +12,16 @@
 *****************************************************************************/
 
 
-/**
- * Better default display name for users
- *
- * @since	Pilau_Base 0.2
- *
- * @uses	get_user_meta()
- * @uses	wp_update_user()
- */
 if ( ! function_exists( 'pilau_default_user_display_name' ) ) {
 	add_action( 'user_register', 'pilau_default_user_display_name' );
+	/**
+	 * Better default display name for users
+	 *
+	 * @since	Pilau_Base 0.2
+	 *
+	 * @uses	get_user_meta()
+	 * @uses	wp_update_user()
+	 */
 	function pilau_default_user_display_name( $user_id ) {
 		// Fetch current user meta information
 		$first = get_user_meta( $user_id, 'first_name', true );
@@ -33,20 +33,20 @@ if ( ! function_exists( 'pilau_default_user_display_name' ) ) {
 }
 
 
-/**
- * Get a WordPress user's role
- *
- * @since 0.1
- *
- * @uses	$wpdb
- * @uses	maybe_unserialize()
- * @uses	WP_User
- *
- * @param	int|object	$user	Either a user's ID or a user object
- * @param	bool		$manual	Optional. If true, a "manual" check is done that avoids using WP functions; use this if the code calling this function is hooked to something that may be called by WP_User, creating an infinite loop
- * @return	string|null			The user's role if the operation was successful, otherwise null
- */
 if ( ! function_exists( 'pilau_get_user_role' ) ) {
+	/**
+	 * Get a WordPress user's role
+	 *
+	 * @since 0.1
+	 *
+	 * @uses	$wpdb
+	 * @uses	maybe_unserialize()
+	 * @uses	WP_User
+	 *
+	 * @param	int|object	$user	Either a user's ID or a user object
+	 * @param	bool		$manual	Optional. If true, a "manual" check is done that avoids using WP functions; use this if the code calling this function is hooked to something that may be called by WP_User, creating an infinite loop
+	 * @return	string|null			The user's role if the operation was successful, otherwise null
+	 */
 	function pilau_get_user_role( $user, $manual = false ) {
 		global $wpdb;
 		$role = null;
@@ -82,22 +82,22 @@ if ( ! function_exists( 'pilau_get_user_role' ) ) {
 }
 
 
-/**
- * Get a user with metadata
- *
- * Currently doesn't work with meta fields that have multiple values -
- * only the first is returned.
- *
- * @since 0.1
- *
- * @uses	get_userdata()
- * @uses	get_user_meta()
- * @uses	maybe_unserialize()
- *
- * @param	int		$id	The user's ID
- * @return	object
- */
 if ( ! function_exists( 'pilau_get_user_with_meta' ) ) {
+	/**
+	 * Get a user with metadata
+	 *
+	 * Currently doesn't work with meta fields that have multiple values -
+	 * only the first is returned.
+	 *
+	 * @since 0.1
+	 *
+	 * @uses	get_userdata()
+	 * @uses	get_user_meta()
+	 * @uses	maybe_unserialize()
+	 *
+	 * @param	int		$id	The user's ID
+	 * @return	object
+	 */
 	function pilau_get_user_with_meta( $id ) {
 		$user = get_userdata( $id );
 		if ( $user ) {
@@ -116,16 +116,16 @@ if ( ! function_exists( 'pilau_get_user_with_meta' ) ) {
 *****************************************************************************/
 
 
-/**
- * Return an array of values from a specific key in each object in an array of objects
- *
- * @since 0.1
- *
- * @param	string		$needle_key	The property to search for inside the array's objects
- * @param	array		$haystack	The array of objects
- * @return	bool|array				False if no match, or an array of values
- */
 if ( ! function_exists( 'pilau_objects_array_values' ) ) {
+	/**
+	 * Return an array of values from a specific key in each object in an array of objects
+	 *
+	 * @since 0.1
+	 *
+	 * @param	string		$needle_key	The property to search for inside the array's objects
+	 * @param	array		$haystack	The array of objects
+	 * @return	bool|array				False if no match, or an array of values
+	 */
 	function pilau_objects_array_values( $needle_key, $haystack ) {
 		// Check we have the right kind of input
 		if ( ! is_array( $haystack ) || empty ( $haystack ) )
@@ -143,18 +143,18 @@ if ( ! function_exists( 'pilau_objects_array_values' ) ) {
 }
 
 
-/**
- * Search an array of objects for property value
- *
- * @since 0.1
- *
- * @param	string		$needle_key		The key being searched for
- * @param	string		$needle_val		The value being searched for
- * @param	array		$haystack		An array of objects
- * @param	bool		$case_sensitive	Optional. Whether to make the value matching case-sensitive.
- * @return	bool|int					False if no match found, otherwise the index of the object in the array that has the key / value combination
- */
 if ( ! function_exists( 'pilau_search_object_array' ) ) {
+	/**
+	 * Search an array of objects for property value
+	 *
+	 * @since 0.1
+	 *
+	 * @param	string		$needle_key		The key being searched for
+	 * @param	string		$needle_val		The value being searched for
+	 * @param	array		$haystack		An array of objects
+	 * @param	bool		$case_sensitive	Optional. Whether to make the value matching case-sensitive.
+	 * @return	bool|int					False if no match found, otherwise the index of the object in the array that has the key / value combination
+	 */
 	function pilau_search_object_array( $needle_key, $needle_val, $haystack, $case_sensitive = false ) {
 		// Check we have the right kind of input
 		if ( ! is_array( $haystack ) || empty ( $haystack ) )
@@ -181,16 +181,16 @@ if ( ! function_exists( 'pilau_search_object_array' ) ) {
 }
 
 
-/**
- * Check that array key or object property exists and there's a value
- *
- * @since 0.1
- *
- * @param	string	$needle		The key or property name
- * @param	mixed	$haystack	The array or object
- * @return	bool
- */
 if ( ! function_exists( 'pilau_value_exists' ) ) {
+	/**
+	 * Check that array key or object property exists and there's a value
+	 *
+	 * @since 0.1
+	 *
+	 * @param	string	$needle		The key or property name
+	 * @param	mixed	$haystack	The array or object
+	 * @return	bool
+	 */
 	function pilau_value_exists( $needle, $haystack ) {
 		if ( is_array( $haystack ) ) {
 			return array_key_exists( $needle, $haystack ) && ! empty( $haystack[ $needle ] );
@@ -202,16 +202,16 @@ if ( ! function_exists( 'pilau_value_exists' ) ) {
 }
 
 
-/**
- * Search arrays in an array for a value, and return the key of the first matching array
- *
- * @since 0.1
- *
- * @param	string			$needle		The value being searched for
- * @param	array			$haystack	An array of arrays
- * @return	bool|string|int				False if no match found, otherwise the index of the object in the array that has the key / value combination
- */
 if ( ! function_exists( 'pilau_search_arrays_in_array' ) ) {
+	/**
+	 * Search arrays in an array for a value, and return the key of the first matching array
+	 *
+	 * @since 0.1
+	 *
+	 * @param	string			$needle		The value being searched for
+	 * @param	array			$haystack	An array of arrays
+	 * @return	bool|string|int				False if no match found, otherwise the index of the object in the array that has the key / value combination
+	 */
 	function pilau_search_arrays_in_array( $needle, $haystack ) {
 		if ( is_array( $haystack ) ) {
 			foreach ( $haystack as $key => $value ) {
@@ -225,16 +225,16 @@ if ( ! function_exists( 'pilau_search_arrays_in_array' ) ) {
 }
 
 
-/**
- * Trim every string value in an array
- *
- * @since 0.1
- *
- * @param	array	$array
- * @param	string	$charlist	Optional. List of characters to trim. Null (default) trims whitespace
- * @return	array				If non-array data is passed, it will be returned intact
- */
 if ( ! function_exists( 'pilau_trim_array' ) ) {
+	/**
+	 * Trim every string value in an array
+	 *
+	 * @since 0.1
+	 *
+	 * @param	array	$array
+	 * @param	string	$charlist	Optional. List of characters to trim. Null (default) trims whitespace
+	 * @return	array				If non-array data is passed, it will be returned intact
+	 */
 	function pilau_trim_array( $array, $charlist = null ) {
 		if ( is_array( $array ) ) {
 			foreach ( $array as &$value ) {
@@ -252,16 +252,16 @@ if ( ! function_exists( 'pilau_trim_array' ) ) {
 }
 
 
-/**
- * A quick way to explode lists stored in constants into the global scope
- *
- * @since 0.1
- *
- * @param	array	$constants	An array of the names of constants to explode
- * @param	string	$sep		Optional. The character used as a separator
- * @return	void
- */
 if ( ! function_exists( 'pilau_explode_constants' ) ) {
+	/**
+	 * A quick way to explode lists stored in constants into the global scope
+	 *
+	 * @since 0.1
+	 *
+	 * @param	array	$constants	An array of the names of constants to explode
+	 * @param	string	$sep		Optional. The character used as a separator
+	 * @return	void
+	 */
 	function pilau_explode_constants( $constants = array(), $sep = ',' ) {
 		if ( is_array( $constants ) && count( $constants ) ) {
 			foreach ( $constants as $constant ) {
@@ -280,19 +280,19 @@ if ( ! function_exists( 'pilau_explode_constants' ) ) {
 *****************************************************************************/
 
 
-/**
- * Email obfuscator
- *
- * @since	Pilau_Base 0.2
- *
- * @link	http://bla.st/
- * @link	http://macromates.com/
- *
- * @param	string	$string
- * @param	string	$noscript_contact	The URL for a contact form in the no-JS fallback link
- * @return	string
- */
 if ( ! function_exists( 'pilau_obfuscate_text' ) ) {
+	/**
+	 * Email obfuscator
+	 *
+	 * @since	Pilau_Base 0.2
+	 *
+	 * @link	http://bla.st/
+	 * @link	http://macromates.com/
+	 *
+	 * @param	string	$string
+	 * @param	string	$noscript_contact	The URL for a contact form in the no-JS fallback link
+	 * @return	string
+	 */
 	function pilau_obfuscate_text( $string, $noscript_contact = '/contact/' ) {
 		// Returns javascript code
 		$new_string = str_rot13( $string );
@@ -308,19 +308,19 @@ if ( ! function_exists( 'pilau_obfuscate_text' ) ) {
 }
 
 
-/**
- * Given an email address, creates a nice obfuscated <a href="mailto:email">email</a> style address
- *
- * @since	Pilau_Base 0.2
- * @uses	pilau_obfuscate_text()
- * @param	string	$email
- * @param	bool	$icon
- * @param	string	$at_sign	The text representing the @ sign in the email, if not "@"
- * @param	string	$text		The link text - defaults to the email address
- * @param	array	$classes	Any extra classes for the a tag
- * @return	string
- */
 if ( ! function_exists( 'pilau_obfuscate_email' ) ) {
+	/**
+	 * Given an email address, creates a nice obfuscated <a href="mailto:email">email</a> style address
+	 *
+	 * @since	Pilau_Base 0.2
+	 * @uses	pilau_obfuscate_text()
+	 * @param	string	$email
+	 * @param	bool	$icon
+	 * @param	string	$at_sign	The text representing the @ sign in the email, if not "@"
+	 * @param	string	$text		The link text - defaults to the email address
+	 * @param	array	$classes	Any extra classes for the a tag
+	 * @return	string
+	 */
 	function pilau_obfuscate_email( $email, $icon = true, $at_sign = "@", $text = "", $classes = array() ) {
 		if ( $at_sign != "@" ) {
 			$email = str_replace( $at_sign, "@", $email );
@@ -355,21 +355,21 @@ function pilau_phone_link( $number, $country_code = '44' ) {
 }
 
 
-/**
- * Get an extract from a string, trimming by words or paragraphs
- *
- * @since	Pilau_Base 0.2
- *
- * @uses	strip_shortcodes()
- * @uses	do_shortcode()
- *
- * @param	string	$string
- * @param	int		$max_words
- * @param	int		$max_paras	If set to zero, trims to words
- * @param	bool	$strip_tags	Strip tags or not. If true, strips WP shortcodes too; if false, parses shortcodes.
- * @return	string
- */
 if ( ! function_exists( 'pilau_extract' ) ) {
+	/**
+	 * Get an extract from a string, trimming by words or paragraphs
+	 *
+	 * @since	Pilau_Base 0.2
+	 *
+	 * @uses	strip_shortcodes()
+	 * @uses	do_shortcode()
+	 *
+	 * @param	string	$string
+	 * @param	int		$max_words
+	 * @param	int		$max_paras	If set to zero, trims to words
+	 * @param	bool	$strip_tags	Strip tags or not. If true, strips WP shortcodes too; if false, parses shortcodes.
+	 * @return	string
+	 */
 	function pilau_extract( $string, $max_words = 30, $max_paras = 0, $strip_tags = true ) {
 		if ( $strip_tags ) {
 			$string = strip_shortcodes( $string );
@@ -402,20 +402,20 @@ if ( ! function_exists( 'pilau_extract' ) ) {
 *****************************************************************************/
 
 
-/**
- * Get the current URL
- *
- * @since	Pilau_Base 0.2
- *
- * @uses	trailingslashit()
- *
- * @param	bool	$keep_qs		Keep query string?
- * @param	bool	$strip_wp_vars	Strip standard WordPress variables?
- * @param	bool	$return_path	Return relative path, or URL?
- * @param	array	$strip_qs_vars	Every query string variable passed in this array will be stripped
- * @return	string
- */
 if ( ! function_exists( 'pilau_get_current_url' ) ) {
+	/**
+	 * Get the current URL
+	 *
+	 * @since	Pilau_Base 0.2
+	 *
+	 * @uses	trailingslashit()
+	 *
+	 * @param	bool	$keep_qs		Keep query string?
+	 * @param	bool	$strip_wp_vars	Strip standard WordPress variables?
+	 * @param	bool	$return_path	Return relative path, or URL?
+	 * @param	array	$strip_qs_vars	Every query string variable passed in this array will be stripped
+	 * @return	string
+	 */
 	function pilau_get_current_url( $keep_qs = true, $strip_wp_vars = false, $return_path = false, $strip_qs_vars = array() ) {
 		$url = '';
 
@@ -469,17 +469,17 @@ if ( ! function_exists( 'pilau_get_current_url' ) ) {
 }
 
 
-/**
- * Return a path from a URL
- *
- * @since	Pilau_Base 0.2
- *
- * @uses	pilau_get_current_url()
- *
- * @param	string	$url	If nothing is passed, the current URL is used
- * @return	string			Path, with no leading or trailing slashes
- */
 if ( ! function_exists( 'pilau_path_from_url' ) ) {
+	/**
+	 * Return a path from a URL
+	 *
+	 * @since	Pilau_Base 0.2
+	 *
+	 * @uses	pilau_get_current_url()
+	 *
+	 * @param	string	$url	If nothing is passed, the current URL is used
+	 * @return	string			Path, with no leading or trailing slashes
+	 */
 	function pilau_path_from_url( $url = null ) {
 		if ( $url === null ) {
 			return pilau_get_current_url( false, true, true );
@@ -490,21 +490,21 @@ if ( ! function_exists( 'pilau_path_from_url' ) ) {
 }
 
 
-/**
- * Wrapper that extends the core url_to_postid() function
- *
- * @since	Pilau_Base 0.2
- *
- * @uses	url_to_postid()
- * @uses	get_post_types()
- * @uses	pilau_path_from_url()
- * @uses	WP_Query
- * @uses	wp_reset_postdata()
- *
- * @param	string	$url
- * @return	int				The post ID
- */
 if ( ! function_exists( 'pilau_url_to_postid' ) ) {
+	/**
+	 * Wrapper that extends the core url_to_postid() function
+	 *
+	 * @since	Pilau_Base 0.2
+	 *
+	 * @uses	url_to_postid()
+	 * @uses	get_post_types()
+	 * @uses	pilau_path_from_url()
+	 * @uses	WP_Query
+	 * @uses	wp_reset_postdata()
+	 *
+	 * @param	string	$url
+	 * @return	int				The post ID
+	 */
 	function pilau_url_to_postid( $url ) {
 
 		// Try the core function
@@ -542,18 +542,18 @@ if ( ! function_exists( 'pilau_url_to_postid' ) ) {
 }
 
 
-/**
- * Get URL of an image
- *
- * @since	Pilau_Base 0.2
- *
- * @uses	wp_get_attachment_image_src()
- *
- * @param	int		$attachment_id	The ID of the image attachment
- * @param	string	$size
- * @return	string
- */
 if ( ! function_exists( 'pilau_get_image_url' ) ) {
+	/**
+	 * Get URL of an image
+	 *
+	 * @since	Pilau_Base 0.2
+	 *
+	 * @uses	wp_get_attachment_image_src()
+	 *
+	 * @param	int		$attachment_id	The ID of the image attachment
+	 * @param	string	$size
+	 * @return	string
+	 */
 	function pilau_get_image_url( $attachment_id, $size = "thumbnail" ) {
 		$image_infos = wp_get_attachment_image_src( $attachment_id, $size );
 		return $image_infos[0];
@@ -561,19 +561,19 @@ if ( ! function_exists( 'pilau_get_image_url' ) ) {
 }
 
 
-/**
- * Get URL of a post's featured image
- *
- * @since	Pilau_Base 0.2
- *
- * @uses	pilau_get_image_url()
- * @uses	get_post_thumbnail_id()
- *
- * @param	int		$post_id
- * @param	string	$size
- * @return	string
- */
 if ( ! function_exists( 'pilau_get_featured_image_url' ) ) {
+	/**
+	 * Get URL of a post's featured image
+	 *
+	 * @since	Pilau_Base 0.2
+	 *
+	 * @uses	pilau_get_image_url()
+	 * @uses	get_post_thumbnail_id()
+	 *
+	 * @param	int		$post_id
+	 * @param	string	$size
+	 * @return	string
+	 */
 	function pilau_get_featured_image_url( $post_id = 0, $size = "thumbnail" ) {
 		global $post;
 		$post_id = $post_id ? $post_id : $post->ID;
@@ -582,15 +582,15 @@ if ( ! function_exists( 'pilau_get_featured_image_url' ) ) {
 }
 
 
-/**
- * Construct URL for website based on user ID
- *
- * @since	Pilau_Base 0.2
- * @param	string	$website	'facebook' | 'twitter' | 'google+' | 'pinterest' | 'linkedin' | 'youtube' | 'instagram' | 'foursquare'
- * @param	string	$id
- * @return	string
- */
 if ( ! function_exists( 'pilau_construct_website_url' ) ) {
+	/**
+	 * Construct URL for website based on user ID
+	 *
+	 * @since	Pilau_Base 0.2
+	 * @param	string	$website	'facebook' | 'twitter' | 'google+' | 'pinterest' | 'linkedin' | 'youtube' | 'instagram' | 'foursquare'
+	 * @param	string	$id
+	 * @return	string
+	 */
 	function pilau_construct_website_url( $website, $id ) {
 		$url = null;
 
@@ -648,17 +648,17 @@ if ( ! function_exists( 'pilau_construct_website_url' ) ) {
 }
 
 
-/**
- * Replace links in text with html links
- *
- * @link	http://stackoverflow.com/questions/1960461/convert-plain-text-urls-into-html-hyperlinks-in-php
- *
- * @since	Pilau_Base 0.2
- *
- * @param	string	$s
- * @return	string
- */
 if ( ! function_exists( 'pilau_link_urls' ) ) {
+	/**
+	 * Replace links in text with html links
+	 *
+	 * @link	http://stackoverflow.com/questions/1960461/convert-plain-text-urls-into-html-hyperlinks-in-php
+	 *
+	 * @since	Pilau_Base 0.2
+	 *
+	 * @param	string	$s
+	 * @return	string
+	 */
 	function pilau_link_urls( $s ) {
 		return preg_replace('@(https?://([-\w\.]+[-\w])+(:\d+)?(/([\w/_\.#-]*(\?\S+)?[^\.\s])?)?)@', '<a href="$1" target="_blank">$1</a>', $s );
 	}
@@ -669,18 +669,18 @@ if ( ! function_exists( 'pilau_link_urls' ) ) {
 *****************************************************************************/
 
 
-/**
- * Get nav menu without markup containers
- *
- * @since	Pilau_Base 0.2
- *
- * @uses	wp_nav_menu()
- *
- * @param	string	$menu	The name given to the menu in Appearance > Menus
- * @param	integer	$depth
- * @return	string
- */
 if ( ! function_exists( 'pilau_menu_without_containers' ) ) {
+	/**
+	 * Get nav menu without markup containers
+	 *
+	 * @since	Pilau_Base 0.2
+	 *
+	 * @uses	wp_nav_menu()
+	 *
+	 * @param	string	$menu	The name given to the menu in Appearance > Menus
+	 * @param	integer	$depth
+	 * @return	string
+	 */
 	function pilau_menu_without_containers( $menu, $depth = 1 ) {
 		$menu_items = wp_nav_menu( array(
 			'menu'				=> $menu,
@@ -701,17 +701,17 @@ if ( ! function_exists( 'pilau_menu_without_containers' ) ) {
 *****************************************************************************/
 
 
-/**
- * Is a plugin installed?
- *
- * @since	Pilau_Base 0.2
- *
- * @uses	$pilau_wp_plugins
- *
- * @param	string	$plugin		The path to the plugin file, relative to the plugins directory
- * @return	bool
- */
 if ( ! function_exists( 'pilau_is_plugin_installed' ) ) {
+	/**
+	 * Is a plugin installed?
+	 *
+	 * @since	Pilau_Base 0.2
+	 *
+	 * @uses	$pilau_wp_plugins
+	 *
+	 * @param	string	$plugin		The path to the plugin file, relative to the plugins directory
+	 * @return	bool
+	 */
 	function pilau_is_plugin_installed( $plugin ) {
 		global $pilau_wp_plugins;
 		return in_array( $plugin, array_keys( $pilau_wp_plugins ) );
@@ -739,15 +739,15 @@ function pilau_update_seralized_option( $option, $key, $value ) {
 }
 
 
-/**
- * Remove magic quotes slashes
- *
- * @since 0.1
- *
- * @param	string	$string
- * @return	string
- */
 if ( ! function_exists( 'pilau_undo_magic_quotes' ) ) {
+	/**
+	 * Remove magic quotes slashes
+	 *
+	 * @since 0.1
+	 *
+	 * @param	string	$string
+	 * @return	string
+	 */
 	function pilau_undo_magic_quotes( $string ) {
 		if ( is_string( $string ) ) {
 			$string = str_replace( array( "\'", '\"' ), array( "'", '"' ), $string );
@@ -757,18 +757,18 @@ if ( ! function_exists( 'pilau_undo_magic_quotes' ) ) {
 }
 
 
-/**
- * Return the formatted size of a file.
- *
- * @since 0.1
- *
- * @uses size_format()
- *
- * @param	string|int	$input			Either the path to a valid file, or a number in bytes
- * @param	string		$default_output	Optional. The string to output if the input can't be used (e.g. the file doesn't exist)
- * @return	string						The size, formatted
- */
 if ( ! function_exists( 'pilau_format_filesize' ) ) {
+	/**
+	 * Return the formatted size of a file.
+	 *
+	 * @since 0.1
+	 *
+	 * @uses size_format()
+	 *
+	 * @param	string|int	$input			Either the path to a valid file, or a number in bytes
+	 * @param	string		$default_output	Optional. The string to output if the input can't be used (e.g. the file doesn't exist)
+	 * @return	string						The size, formatted
+	 */
 	function pilau_format_filesize( $input, $default_output = '??' ) {
 		$size = null;
 		$output = $default_output;

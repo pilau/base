@@ -8,22 +8,22 @@
  */
 
 
-/**
- * Custom handling of content output
- *
- * @since	Pilau_Base 0.2
- * @uses	get_the_content()
- * @uses	pilau_extract()
- * @uses	get_the_excerpt()
- *
- * @param	string	$content	Content from WP post - defaults to current Loop content
- * @param	string	$action		'extended' (return text after more tag) | 'extract' (return text before more tag)
- * @param	bool	$strip_imgs
- * @param	int		$paragraphs
- * @param	bool	$filter		Apply the_content filter to result?
- * @return	string
- */
 if ( ! function_exists( 'pilau_content' ) ) {
+	/**
+	 * Custom handling of content output
+	 *
+	 * @since	Pilau_Base 0.2
+	 * @uses	get_the_content()
+	 * @uses	pilau_extract()
+	 * @uses	get_the_excerpt()
+	 *
+	 * @param	string	$content	Content from WP post - defaults to current Loop content
+	 * @param	string	$action		'extended' (return text after more tag) | 'extract' (return text before more tag)
+	 * @param	bool	$strip_imgs
+	 * @param	int		$paragraphs
+	 * @param	bool	$filter		Apply the_content filter to result?
+	 * @return	string
+	 */
 	function pilau_content( $content = null, $action = "extract", $strip_imgs = true, $paras = 1, $filter = true ) {
 		if ( is_null( $content ) ) {
 			$content = get_the_content();
@@ -73,27 +73,27 @@ if ( ! function_exists( 'pilau_content' ) ) {
 }
 
 
-/**
- * Return the description or an extract
- *
- * If there's a description set by Yoast SEO or Developer's Custom Fields, returns
- * that; otherwise, returns a content extract. Content is always tidied up, i.e. no HTML tags.
- *
- * @since	Pilau_Base 0.2
- * @uses	slt_cf_field_value()
- * @uses	get_post()
- * @uses	pilau_extract()
- *
- * @param	int		$post_id
- * @param	string	$description	If you possibly already have the description, pass it here
- * 									to be trimmed
- * @param	string	$post_content	 If you possibly already have the full content, pass it here
- * @param	int		$maxwords		Set to zero to avoid trimming description custom field; content will
- * 									always be trimmed.
- * @return	string
- *
- */
 if ( ! function_exists( 'pilau_description_or_extract' ) ) {
+	/**
+	 * Return the description or an extract
+	 *
+	 * If there's a description set by Yoast SEO or Developer's Custom Fields, returns
+	 * that; otherwise, returns a content extract. Content is always tidied up, i.e. no HTML tags.
+	 *
+	 * @since	Pilau_Base 0.2
+	 * @uses	slt_cf_field_value()
+	 * @uses	get_post()
+	 * @uses	pilau_extract()
+	 *
+	 * @param	int		$post_id
+	 * @param	string	$description	If you possibly already have the description, pass it here
+	 * 									to be trimmed
+	 * @param	string	$post_content	 If you possibly already have the full content, pass it here
+	 * @param	int		$maxwords		Set to zero to avoid trimming description custom field; content will
+	 * 									always be trimmed.
+	 * @return	string
+	 *
+	 */
 	function pilau_description_or_extract( $post_id, $description = '', $post_content = '', $maxwords = 30 ) {
 		if ( function_exists( 'wpseo_get_value' ) && ! $description ) {
 			$description = wpseo_get_value( 'metadesc', $post_id );
@@ -118,15 +118,15 @@ if ( ! function_exists( 'pilau_description_or_extract' ) ) {
 }
 
 
-/**
- * "Not found" fragment
- *
- * @since	Pilau_Base 0.2
- *
- * @param	string	$title
- * @return	void
- */
 if ( ! function_exists( 'pilau_not_found' ) ) {
+	/**
+	 * "Not found" fragment
+	 *
+	 * @since	Pilau_Base 0.2
+	 *
+	 * @param	string	$title
+	 * @return	void
+	 */
 	function pilau_not_found( $title = null ) {
 		if ( ! $title ) {
 			$title = __( 'Content not found' );
@@ -145,21 +145,21 @@ if ( ! function_exists( 'pilau_not_found' ) ) {
 }
 
 
-/**
- * 404 page title
- *
- * To be hooked as a filter onto wp_title when needed.
- *
- * @since	Pilau_Base 0.2
- *
- * @param	string	$title
- * @param	string	$sep
- * @param	string	$seplocation
- * @return	string
- *
- * @todo	Respect $seplocation
- */
 if ( ! function_exists( 'pilau_404_title' ) ) {
+	/**
+	 * 404 page title
+	 *
+	 * To be hooked as a filter onto wp_title when needed.
+	 *
+	 * @since	Pilau_Base 0.2
+	 *
+	 * @param	string	$title
+	 * @param	string	$sep
+	 * @param	string	$seplocation
+	 * @return	string
+	 *
+	 * @todo	Respect $seplocation
+	 */
 	function pilau_404_title( $title, $sep, $seplocation ) {
 		return __( 'Page not found' ) . ' ' . $sep . ' ' . get_bloginfo( 'name' );
 	}
