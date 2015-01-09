@@ -9,43 +9,12 @@
  */
 
 
-/**
- * Admin notices
- *
- * @since	Pilau_Base 0.2
- */
-add_action( 'admin_notices', 'pilau_base_admin_notices', 1 );
-function pilau_base_admin_notices() {
-	global $pilau_base_options;
-
-	// Theme activation
-	if ( ! $pilau_base_options['settings_script_run'] ) {
-
-	}
-
-}
-
-
-/**
- * Admin menus
- *
- * @since	Pilau_Base 0.2
- */
-add_action( 'admin_menu', 'pilau_base_admin_menus', 1 );
-function pilau_base_admin_menus() {
-
-	/* Register new menus
-	***************************************************************************/
-
-}
-
-
+add_action( 'add_meta_boxes', 'pilau_base_remove_meta_boxes', 1 );
 /**
  * Remove meta boxes
  *
  * @since	Pilau_Base 0.2
  */
-add_action( 'add_meta_boxes', 'pilau_base_remove_meta_boxes', 1 );
 function pilau_base_remove_meta_boxes() {
 
 	/* Comments */
@@ -59,6 +28,7 @@ function pilau_base_remove_meta_boxes() {
 }
 
 
+add_action( 'admin_init', 'pilau_base_customize_list_columns' );
 /**
  * Customize list columns
  *
@@ -67,7 +37,6 @@ function pilau_base_remove_meta_boxes() {
  *
  * @since	Pilau_Base 0.2
  */
-add_action( 'admin_init', 'pilau_base_customize_list_columns' );
 function pilau_base_customize_list_columns() {
 	add_filter( 'manage_edit-post_columns', 'pilau_base_admin_columns', 10000, 1 );
 	add_filter( 'manage_edit-page_columns', 'pilau_base_admin_columns', 10000, 1 );

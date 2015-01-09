@@ -23,6 +23,7 @@ if ( ! function_exists( 'pilau_check_referrer' ) ) {
 	}
 }
 
+
 /**
  * Block malicious requests
  *
@@ -43,6 +44,7 @@ if ( ! function_exists( 'pilau_block_malicious_requests' ) ) {
 		}
 	}
 }
+
 
 /**
  * Remove WP version from RSS

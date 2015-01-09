@@ -6,7 +6,6 @@ Author:			Pilau
 Version:		0.2
 Author URI:		http://pilaubase.com/
 
-- All styles - CSS, LESS or SASS - are in the /styles/ folder
-- Transpilation of LESS or SASS should be done locally
+NOTE: Base should not have any styles. All styling is done in Starter.
 
 */

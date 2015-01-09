@@ -8,7 +8,7 @@ Pilau Base
 
 However, we're very happy if anyone finds our work of use! If you feel like contributing, even better.
 
-Pilau is split into a parent theme (Base) and a child theme (Starter) so that Base can be released on the wordpress.org themes repository, allowing easy updates to the core functionality in base (especially security measures and basic functions).
+Pilau is split into a parent theme (Base) and a child theme (Starter) so that things like security measures and basic functions in Base can be easily updated across sites. It's a parent theme rather than a plugin because Starter's dependency on it is thus easier to enforce.
 
 For documentation, [check out the wiki](https://github.com/pilau/base/wiki).
 

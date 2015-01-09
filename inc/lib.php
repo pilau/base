@@ -11,6 +11,7 @@
 /* WordPress user stuff
 *****************************************************************************/
 
+
 /**
  * Better default display name for users
  *
@@ -30,6 +31,7 @@ if ( ! function_exists( 'pilau_default_user_display_name' ) ) {
 		wp_update_user( array( "ID" => $user_id, "display_name" => $display ) );
 	}
 }
+
 
 /**
  * Get a WordPress user's role
@@ -79,6 +81,7 @@ if ( ! function_exists( 'pilau_get_user_role' ) ) {
 	}
 }
 
+
 /**
  * Get a user with metadata
  *
@@ -112,6 +115,7 @@ if ( ! function_exists( 'pilau_get_user_with_meta' ) ) {
 /* Array and object functions
 *****************************************************************************/
 
+
 /**
  * Return an array of values from a specific key in each object in an array of objects
  *
@@ -137,6 +141,7 @@ if ( ! function_exists( 'pilau_objects_array_values' ) ) {
 		return $values;
 	}
 }
+
 
 /**
  * Search an array of objects for property value
@@ -175,6 +180,7 @@ if ( ! function_exists( 'pilau_search_object_array' ) ) {
 	}
 }
 
+
 /**
  * Check that array key or object property exists and there's a value
  *
@@ -194,6 +200,7 @@ if ( ! function_exists( 'pilau_value_exists' ) ) {
 		return false;
 	}
 }
+
 
 /**
  * Search arrays in an array for a value, and return the key of the first matching array
@@ -216,6 +223,7 @@ if ( ! function_exists( 'pilau_search_arrays_in_array' ) ) {
 		return false;
 	}
 }
+
 
 /**
  * Trim every string value in an array
@@ -242,6 +250,7 @@ if ( ! function_exists( 'pilau_trim_array' ) ) {
 		return $array;
 	}
 }
+
 
 /**
  * A quick way to explode lists stored in constants into the global scope
@@ -270,6 +279,7 @@ if ( ! function_exists( 'pilau_explode_constants' ) ) {
 /* String functions
 *****************************************************************************/
 
+
 /**
  * Email obfuscator
  *
@@ -296,6 +306,7 @@ if ( ! function_exists( 'pilau_obfuscate_text' ) ) {
 		return $result;
 	}
 }
+
 
 /**
  * Given an email address, creates a nice obfuscated <a href="mailto:email">email</a> style address
@@ -329,6 +340,7 @@ if ( ! function_exists( 'pilau_obfuscate_email' ) ) {
 	}
 }
 
+
 /**
  * Create a hyperlink for phone numbers
  *
@@ -341,6 +353,7 @@ if ( ! function_exists( 'pilau_obfuscate_email' ) ) {
 function pilau_phone_link( $number, $country_code = '44' ) {
 	return 'tel:+' . $country_code .  preg_replace( '/[^0-9]/', '', ltrim( $number, 0 ) );
 }
+
 
 /**
  * Get an extract from a string, trimming by words or paragraphs
@@ -387,6 +400,7 @@ if ( ! function_exists( 'pilau_extract' ) ) {
 
 /* URLs
 *****************************************************************************/
+
 
 /**
  * Get the current URL
@@ -454,6 +468,7 @@ if ( ! function_exists( 'pilau_get_current_url' ) ) {
 	}
 }
 
+
 /**
  * Return a path from a URL
  *
@@ -473,6 +488,7 @@ if ( ! function_exists( 'pilau_path_from_url' ) ) {
 		return trim( $url_parts['path'], '/' );
 	}
 }
+
 
 /**
  * Wrapper that extends the core url_to_postid() function
@@ -525,6 +541,7 @@ if ( ! function_exists( 'pilau_url_to_postid' ) ) {
 	}
 }
 
+
 /**
  * Get URL of an image
  *
@@ -542,6 +559,7 @@ if ( ! function_exists( 'pilau_get_image_url' ) ) {
 		return $image_infos[0];
 	}
 }
+
 
 /**
  * Get URL of a post's featured image
@@ -562,6 +580,7 @@ if ( ! function_exists( 'pilau_get_featured_image_url' ) ) {
 		return pilau_get_image_url( get_post_thumbnail_id( $post_id ), $size );
 	}
 }
+
 
 /**
  * Construct URL for website based on user ID
@@ -628,6 +647,7 @@ if ( ! function_exists( 'pilau_construct_website_url' ) ) {
 	}
 }
 
+
 /**
  * Replace links in text with html links
  *
@@ -647,6 +667,7 @@ if ( ! function_exists( 'pilau_link_urls' ) ) {
 
 /* Navigation
 *****************************************************************************/
+
 
 /**
  * Get nav menu without markup containers
@@ -679,6 +700,7 @@ if ( ! function_exists( 'pilau_menu_without_containers' ) ) {
 /* Plugin-related
 *****************************************************************************/
 
+
 /**
  * Is a plugin installed?
  *
@@ -700,6 +722,7 @@ if ( ! function_exists( 'pilau_is_plugin_installed' ) ) {
 /* Miscellaneous
 *****************************************************************************/
 
+
 /**
  * Update an option in a serialized option
  *
@@ -714,6 +737,7 @@ function pilau_update_seralized_option( $option, $key, $value ) {
 	$temp[ $key ] = $value;
 	return update_option( $option, $temp );
 }
+
 
 /**
  * Remove magic quotes slashes
@@ -731,6 +755,7 @@ if ( ! function_exists( 'pilau_undo_magic_quotes' ) ) {
 		return $string;
 	}
 }
+
 
 /**
  * Return the formatted size of a file.
@@ -764,6 +789,7 @@ if ( ! function_exists( 'pilau_format_filesize' ) ) {
 		return $output;
 	}
 }
+
 
 /**
  * Make sure file type is simple
@@ -829,6 +855,7 @@ function pilau_simple_file_type( $type ) {
 
 	return $type_simple;
 }
+
 
 /**
  * Test for being on login page

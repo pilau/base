@@ -15,45 +15,19 @@
  */
 add_action( 'after_setup_theme', 'pilau_base_setup', 1 );
 function pilau_base_setup() {
-	global $pilau_base_options, $pilau_breakpoints;
-
-	/*
-	 * Theme options
-	 */
-	$pilau_base_options = get_option( 'pilau_base_options', array() );
-	if ( ! is_array( $pilau_base_options ) || empty( $pilau_base_options ) ) {
-
-		// First time theme has been activated
-		$pilau_base_options = array(
-		);
-		update_option( 'pilau_base_options', $pilau_base_options );
-
-	}
-
-	/*
-	 * Responsive stuff
-	 */
-
-	// These breakpoints are currently used for responsive image sizes with Picturefill
-	if ( ! is_array( $pilau_breakpoints ) ) {
-
-		$pilau_breakpoints = array(
-			'large'		=> '1000px', // This and above is "large"
-			'medium'	=> '640px', // This and above is "medium"; below is "small"
-		);
-
-	}
+	global $post;
 
 	/*
 	 * Refresh
-	 *
-	 * TODO:	Try to integrate with WP Super Cache to delete cache
 	 */
-	/*
 	if ( PILAU_FRONT_OR_AJAX && isset( $_GET['refresh'] ) ) {
 
+		// Do WP Super Cache clear?
+		if ( function_exists( 'wp_super_cache_text_domain' ) && is_object( $post ) ) {
+			wp_cache_post_change( $post->ID );
+		}
+
 	}
-	*/
 
 }
 
@@ -73,6 +47,7 @@ if ( ! function_exists( 'pilau_remove_title_attributes' ) ) {
 		return preg_replace( '/\s*title\s*=\s*(["\']).*?\1/', '', $input );
 	}
 }
+
 
 /**
  * Remove unnecessary attributes from nav menu items
@@ -97,6 +72,7 @@ if ( ! function_exists( 'pilau_nav_menu_css_classes' ) ) {
 		return $new_classes;
 	}
 }
+
 
 /**
  * Blank default nav menu

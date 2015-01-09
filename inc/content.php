@@ -144,6 +144,7 @@ if ( ! function_exists( 'pilau_not_found' ) ) {
 	}
 }
 
+
 /**
  * 404 page title
  *

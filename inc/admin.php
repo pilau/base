@@ -47,22 +47,46 @@ if ( ! function_exists( 'pilau_slug_length' ) ) {
 }
 
 
+if ( PILAU_IGNORE_UPDATES_FOR_INACTIVE_PLUGINS ) {
+	add_filter('transient_update_plugins', 'update_active_plugins');
+}
 /**
  * Ignore updates for inactive plugins
  *
  * @since	Pilau_Base 0.2
- * @link	http://wordpress.org/extend/plugins/update-active-plugins-only/
+ * @link	http://bloke.org/wordpress/remove-plugin-update-notice-only-for-inactive-plugins/
  */
-if ( PILAU_IGNORE_UPDATES_FOR_INACTIVE_PLUGINS ) {
-	add_filter( 'http_request_args', 'pilau_ignore_updates_for_inactive_plugins', 10, 2 );
-	function pilau_ignore_updates_for_inactive_plugins( $r, $url ) {
-		if ( 0 === strpos( $url, 'http://api.wordpress.org/plugins/update-check/' ) ) {
-			$plugins = json_decode( $r['body']['plugins'], true );
-			$plugins['plugins'] = array_intersect_key( $plugins['plugins'], array_flip( $plugins['active'] ) );
-			$r['body']['plugins'] = json_encode( $plugins );
+function pilau_update_active_plugins( $value = '' ) {
+
+	if ( ( isset( $value->response ) ) && ( count( $value->response ) ) ) {
+
+		// Get the list cut current active plugins
+		$active_plugins = get_option( 'active_plugins' );
+		if ( $active_plugins ) {
+
+			//  Here we start to compare the $value->response
+			//  items checking each against the active plugins list.
+			foreach ( $value->response as $plugin_idx => $plugin_item ) {
+
+				// If the response item is not an active plugin then remove it.
+				// This will prevent WordPress from indicating the plugin needs update actions.
+				if ( ! in_array( $plugin_idx, $active_plugins ) ) {
+					unset( $value->response[ $plugin_idx ] );
+				}
+			}
+
+		} else {
+
+			// If no active plugins then ignore the inactive out of date ones.
+			foreach( $value->response as $plugin_idx => $plugin_item ) {
+				unset( $value->response );
+			}
+
 		}
-		return $r;
+
 	}
+
+	return $value;
 }
 
 
