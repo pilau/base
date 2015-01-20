@@ -135,7 +135,7 @@ if ( ! function_exists( 'pilau_not_found' ) ) {
 
 		<article id="post-0" class="post error404 not-found" role="article">
 			<h1><?php echo $title; ?></h1>
-			<div class="post-content">
+			<div class="editor-content">
 				<p><?php _e( "The content you're looking for could not be found. Please try navigating somewhere else, or try searching." ); ?></p>
 			</div>
 		</article><!-- #post-0 -->

@@ -64,8 +64,8 @@ if ( ! function_exists( 'pilau_nav_menu_css_classes' ) ) {
 	function pilau_nav_menu_css_classes( $classes, $item, $args ) {
 		$new_classes = array();
 		foreach ( $classes as $class ) {
-			// We're only keeping classes that indicate location - all others seem redundant
-			if ( ! ( strlen( $class ) > 8 && substr( $class, 0, 9 ) == 'menu-item' ) && ( strpos( $class, 'page' ) === false || strpos( $class, 'ancestor' ) !== false ) ) {
+			// We're only keeping classes that indicate location, plus standard class
+			if ( $class == 'menu-item' || ( ! ( strlen( $class ) > 8 && substr( $class, 0, 9 ) == 'menu-item' ) && ( strpos( $class, 'page' ) === false || strpos( $class, 'ancestor' ) !== false ) ) ) {
 				$new_classes[] = $class;
 			}
 		}
