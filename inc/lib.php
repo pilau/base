@@ -112,6 +112,41 @@ if ( ! function_exists( 'pilau_get_user_with_meta' ) ) {
 }
 
 
+/* WordPress post, taxonomy, meta etc.
+*****************************************************************************/
+
+
+if ( ! function_exists( 'pilau_get_the_term' ) ) {
+	/**
+	 * Get a single term associated with a post
+	 *
+	 * @since 0.2
+	 *
+	 * @param	int						$post_id	Defaults to current post ID
+	 * @param	string					$taxonomy
+	 * @return	object|false|wp_error
+	 */
+	function pilau_get_the_term( $post_id = null, $taxonomy = 'post_tag' ) {
+		global $post;
+
+		// Post ID
+		if ( ! $post_id ) {
+			$post_id = $post->ID;
+		}
+
+		// Get the terms
+		$the_term = get_the_terms( $post_id, $taxonomy );
+
+		// Reduce to one if we've got something
+		if ( is_array( $the_term ) ) {
+			$the_term = reset( $the_term );
+		}
+
+		return $the_term;
+	}
+}
+
+
 /* Array and object functions
 *****************************************************************************/
 
