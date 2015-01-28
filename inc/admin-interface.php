@@ -56,10 +56,10 @@ function pilau_base_customize_list_columns() {
 function pilau_base_admin_columns( $cols ) {
 
 	// Override core stuff
-	if ( ! PILAU_USE_CATEGORIES && isset( $cols['categories'] ) ) {
+	if ( ( ! PILAU_USE_CATEGORIES || PILAU_HIDE_CATEGORIES ) && isset( $cols['categories'] ) ) {
 		unset( $cols['categories'] );
 	}
-	if ( ! PILAU_USE_TAGS && isset( $cols['tags'] ) ) {
+	if ( ( ! PILAU_USE_TAGS || PILAU_HIDE_TAGS ) && isset( $cols['tags'] ) ) {
 		unset( $cols['tags'] );
 	}
 	if ( ! PILAU_USE_COMMENTS && isset( $cols['comments'] ) ) {
