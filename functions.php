@@ -91,6 +91,7 @@ require( dirname( __FILE__ ) . '/inc/lib.php' );
 require( dirname( __FILE__ ) . '/inc/content.php');
 require( dirname( __FILE__ ) . '/inc/media.php');
 require( dirname( __FILE__ ) . '/inc/wp-toolbar.php' );
+require( dirname( __FILE__ ) . '/inc/gravity-forms.php' );
 if ( ! PILAU_FRONT_OR_AJAX ) {
 	require( dirname( __FILE__ ) . '/inc/admin.php' );
 }
