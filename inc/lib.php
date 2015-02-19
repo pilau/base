@@ -904,3 +904,21 @@ function pilau_simple_file_type( $type ) {
 function pilau_is_login_page() {
 	return in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php' ) );
 }
+
+
+/**
+ * Wrapper for core checked() which can handle arrays
+ *
+ * @since	0.2
+ * @param	mixed	$checked
+ * @param	mixed	$current
+ * @param	bool	$echo
+ * @return	void|string
+ */
+function pilau_checked( $checked, $current = true, $echo = true ) {
+	if ( is_array( $checked ) ) {
+		$checked = in_array( $current, $checked );
+		$current = true;
+	}
+	return checked( $checked, $current, $echo );
+}
