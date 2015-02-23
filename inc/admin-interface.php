@@ -41,7 +41,7 @@ function pilau_base_customize_list_columns() {
 	add_filter( 'manage_edit-post_columns', 'pilau_base_admin_columns', 10000, 1 );
 	add_filter( 'manage_edit-page_columns', 'pilau_base_admin_columns', 10000, 1 );
 	foreach ( get_post_types( array( 'public' => true ), 'names' ) as $pt ) {
-		add_filter( 'manage_' . $pt . '_posts_columns', 'pilau_admin_columns', 10000, 1 );
+		add_filter( 'manage_' . $pt . '_posts_columns', 'pilau_base_admin_columns', 10000, 1 );
 	}
 }
 
