@@ -712,21 +712,29 @@ if ( ! function_exists( 'pilau_menu_without_containers' ) ) {
 	 *
 	 * @uses	wp_nav_menu()
 	 *
-	 * @param	string	$menu	The name given to the menu in Appearance > Menus
+	 * @param	string	$menu				The name given to the menu in Appearance > Menus
 	 * @param	integer	$depth
+	 * @param	bool	$strip_whitespace	Strip whitespace from between menu items?
 	 * @return	string
 	 */
-	function pilau_menu_without_containers( $menu, $depth = 1 ) {
+	function pilau_menu_without_containers( $menu, $depth = 1, $strip_whitespace = false ) {
+
+		// Get menu items
 		$menu_items = wp_nav_menu( array(
 			'menu'				=> $menu,
 			'container'			=> '',
 			'echo'				=> false,
 			'depth'				=> $depth
 		));
+
 		// Strip ul wrapper
 		$menu_items = trim( $menu_items );
 		$menu_items = preg_replace( '#<ul[^>]*>#i', '', $menu_items, 1 );
 		$menu_items = substr( $menu_items, 0, -5 );
+
+		// Strip whitespace?
+		$menu_items = preg_replace( '/>\s+</', '><', $menu_items );
+
 		return $menu_items;
 	}
 }
