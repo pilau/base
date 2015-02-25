@@ -712,16 +712,16 @@ if ( ! function_exists( 'pilau_menu_without_containers' ) ) {
 	 *
 	 * @uses	wp_nav_menu()
 	 *
-	 * @param	string	$menu				The name given to the menu in Appearance > Menus
+	 * @param	string	$theme_location
 	 * @param	integer	$depth
 	 * @param	bool	$strip_whitespace	Strip whitespace from between menu items?
 	 * @return	string
 	 */
-	function pilau_menu_without_containers( $menu, $depth = 1, $strip_whitespace = false ) {
+	function pilau_menu_without_containers( $theme_location, $depth = 1, $strip_whitespace = false ) {
 
 		// Get menu items
 		$menu_items = wp_nav_menu( array(
-			'menu'				=> $menu,
+			'theme_location'	=> $theme_location,
 			'container'			=> '',
 			'echo'				=> false,
 			'depth'				=> $depth
