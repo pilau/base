@@ -165,6 +165,58 @@ if ( ! function_exists( 'pilau_img_defer_load' ) ) {
 }
 
 
+if ( ! function_exists( 'pilau_responsive_image' ) ) {
+	/**
+	 * Generate image markup using the srcset and sizes attributes for the <img> element
+	 *
+	 * Make sure you populate $pilau_image_sizes in pilau_setup_media() in the starter theme
+	 *
+	 * @since	Pilau_Base 0.2
+	 * @link	https://css-tricks.com/responsive-images-youre-just-changing-resolutions-use-srcset/
+	 * @link	http://ericportis.com/posts/2014/srcset-sizes/
+	 *
+	 * @uses	array	$pilau_image_sizes
+	 * @param	int		$image_id
+	 * @param	array	$srcset_sizes	The WP image sizes to pass to srcset. Defaults to thumbnail,
+	 * 									medium, large
+	 * @param	string	$default_size	Defaults to 'full'
+	 * @param	array	$sizes			Defaults to 100vw
+	 * @param	string	$alt
+	 * @param	array	$classes
+	 * @return	string
+	 */
+	function pilau_responsive_image( $image_id, $srcset_sizes = null, $default_size = 'full', $sizes = null, $alt = null, $classes = array() ) {
+		global $pilau_image_sizes;
+		$output = '';
+
+		// Defaults
+		if ( empty( $srcset_sizes ) ) {
+			$srcset_sizes = array( 'thumbnail', 'medium', 'large' );
+		}
+		if ( empty( $sizes ) ) {
+			$sizes = array( '100vw' );
+		}
+		// Allow an empty string to be passed for alt
+		if ( is_null( $alt ) ) {
+			$alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
+		}
+
+		// Build the srcset attribute
+		$srcset = array();
+		foreach ( $srcset_sizes as $srcset_size ) {
+			if ( isset( $pilau_image_sizes[ $srcset_size ]['width'] ) ) {
+				$srcset[] = pilau_get_image_url( $image_id, $srcset_size ) . ' ' . $pilau_image_sizes[ $srcset_size ]['width'] . 'w';
+			}
+		}
+
+		// Generate the markup
+		$output .= '<img src="' . pilau_get_image_url( $image_id, $default_size ) . '" srcset="' . implode( ', ', $srcset ) . '" sizes="' . implode( ', ', $sizes ) . '" alt="' . $alt . '" class="' . implode( ' ', $classes ) . '">';
+
+		return $output;
+	}
+}
+
+
 if ( ! function_exists( 'pilau_responsive_picture' ) ) {
 	/**
 	 * Generate image markup using the <picture> element for responsive sizes
