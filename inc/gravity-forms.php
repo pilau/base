@@ -13,6 +13,8 @@
  *
  * @since	0.2
  * @param	array	$form
+ * @param	string	$field_meta_key
+ * @param	string	$field_meta_value
  * @return	mixed
  */
 function pilau_gf_get_field( $form, $field_meta_key, $field_meta_value ) {
@@ -31,4 +33,26 @@ function pilau_gf_get_field( $form, $field_meta_key, $field_meta_value ) {
 	}
 
 	return $the_field;
+}
+
+
+/**
+ * Return a value from a submitted form / entry combination
+ *
+ * @since	0.2
+ * @param	array	$form
+ * @param	array	$entry
+ * @param	string	$label
+ * @return	mixed
+ */
+function pilau_gf_get_value( $form, $entry, $label ) {
+	$the_value = null;
+
+	// Get the field
+	$field = pilau_gf_get_field( $form, 'label', $label );
+	if ( $field ) {
+		$the_value = $entry[ $field->id ];
+	}
+
+	return $the_value;
 }
