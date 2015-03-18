@@ -181,7 +181,9 @@ if ( ! function_exists( 'pilau_responsive_image' ) ) {
 	 * 									medium, large
 	 * @param	string	$default_size	Defaults to 'full'
 	 * @param	array	$sizes			Defaults to 100vw
-	 * @param	string	$alt
+	 * @param	string	$alt			Explicitly pass an empty string if necessary; null will trigger
+	 * 									an attempt to grab the alt text from the attachment, with title
+	 * 									as a fallback
 	 * @param	array	$classes
 	 * @return	string
 	 */
@@ -196,9 +198,13 @@ if ( ! function_exists( 'pilau_responsive_image' ) ) {
 		if ( empty( $sizes ) ) {
 			$sizes = array( '100vw' );
 		}
+
 		// Allow an empty string to be passed for alt
 		if ( is_null( $alt ) ) {
 			$alt = get_post_meta( $image_id, '_wp_attachment_image_alt', true );
+			if ( empty( $alt ) ) {
+				$alt = get_the_title( $image_id );
+			}
 		}
 
 		// Build the srcset attribute
