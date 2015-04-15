@@ -733,7 +733,9 @@ if ( ! function_exists( 'pilau_menu_without_containers' ) ) {
 		$menu_items = substr( $menu_items, 0, -5 );
 
 		// Strip whitespace?
-		$menu_items = preg_replace( '/>\s+</', '><', $menu_items );
+		if ( $strip_whitespace ) {
+			$menu_items = preg_replace( '/>\s+</', '><', $menu_items );
+		}
 
 		return $menu_items;
 	}
