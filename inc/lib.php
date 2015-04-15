@@ -777,15 +777,21 @@ if ( ! function_exists( 'pilau_menu_without_containers' ) ) {
 	 * @param	bool	$strip_whitespace	Strip whitespace from between menu items?
 	 * @return	string
 	 */
-	function pilau_menu_without_containers( $theme_location, $depth = 1, $strip_whitespace = false ) {
+	function pilau_menu_without_containers( $theme_location, $depth = 1, $strip_whitespace = false, $walker = null ) {
 
-		// Get menu items
-		$menu_items = wp_nav_menu( array(
+		// Set up args
+		$args = array(
 			'theme_location'	=> $theme_location,
 			'container'			=> '',
 			'echo'				=> false,
-			'depth'				=> $depth
-		));
+			'depth'				=> $depth,
+		);
+		if ( is_object( $walker ) ) {
+			$args['walker'] = $walker;
+		}
+
+		// Get menu items
+		$menu_items = wp_nav_menu( $args );
 
 		// Strip ul wrapper
 		$menu_items = trim( $menu_items );
