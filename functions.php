@@ -88,6 +88,8 @@ if ( ! defined( 'PILAU_PLACEHOLDER_GIF_URL' ) ) {
 require( dirname( __FILE__ ) . '/inc/setup.php' );
 require( dirname( __FILE__ ) . '/inc/security.php' );
 require( dirname( __FILE__ ) . '/inc/lib.php' );
+require( dirname( __FILE__ ) . '/inc/user.php' );
+require( dirname( __FILE__ ) . '/inc/nav.php' );
 require( dirname( __FILE__ ) . '/inc/content.php');
 require( dirname( __FILE__ ) . '/inc/media.php');
 require( dirname( __FILE__ ) . '/inc/wp-toolbar.php' );
