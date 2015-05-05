@@ -22,6 +22,10 @@ if ( ! function_exists( 'pilau_wmode_opaque' ) ) {
 		if ( strpos( $html, '<embed' ) !== false ) {
 			$html = str_replace( '<embed', '<embed wmode="opaque"', $html );
 		}
+		if ( strpos( $html, '<iframe' ) !== false ) {
+			$html = str_replace( '<iframe', '<iframe wmode="opaque"', $html );
+			$html = preg_replace( '/ src="[^"\?]+\?/', '\0wmode=transparent&amp;', $html );
+		}
 		return $html;
 	}
 }
