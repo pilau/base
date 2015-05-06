@@ -97,8 +97,23 @@ class Pilau_Walker_Nav_Menu extends Walker_Nav_Menu {
 		}
 
 		// Add to output
-		$output .= "\n$indent<ul class=\"sub-menu\"" . $accessibility_attributes . ">\n";
+		// Include div wrapper for potential styling
+		$output .= "\n$indent<div class=\"sub-menu-wrapper\"" . $accessibility_attributes . "><ul class=\"sub-menu\">\n";
 
+	}
+
+	/**
+	 * Ends the list of after the elements are added.
+	 *
+	 * @since 0.2
+	 *
+	 * @param string $output Passed by reference. Used to append additional content.
+	 * @param int    $depth  Depth of menu item. Used for padding.
+	 * @param array  $args   An array of arguments. @see wp_nav_menu()
+	 */
+	public function end_lvl( &$output, $depth = 0, $args = array() ) {
+		$indent = str_repeat("\t", $depth);
+		$output .= "$indent</ul></div>\n";
 	}
 
 	/**
@@ -162,31 +177,24 @@ class Pilau_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args, $depth );
 		$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
 
-		/**
-		 * ARIA attributes for keyboard accessibility
-		 *
-		 * @since	0.2
-		 */
-		$aria_attributes = array();
-		if ( $depth == 0 && strpos( $class_names, 'menu-item-has-children' ) !== false ) {
-			$aria_attributes['haspopup'] = 'true';
-			$aria_attributes['owns'] = $aria_attributes['controls'] = 'sub-menu-for-' . $item->ID;
-			$aria_attributes['expanded'] = 'false';
-		}
-
-		$output .= $indent . '<li' . $id . $class_names;
-		if ( ! empty( $aria_attributes ) ) {
-			foreach ( $aria_attributes as $attribute => $value ) {
-				$output .= ' aria-' . $attribute . '="' . $value . '"';
-			}
-		}
-		$output .= '>';
+		$output .= $indent . '<li' . $id . $class_names . '>';
 
 		$atts = array();
 		$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
 		$atts['target'] = ! empty( $item->target )     ? $item->target     : '';
 		$atts['rel']    = ! empty( $item->xfn )        ? $item->xfn        : '';
 		$atts['href']   = ! empty( $item->url )        ? $item->url        : '';
+
+		/**
+		 * ARIA attributes for keyboard accessibility
+		 *
+		 * @since	0.2
+		 */
+		if ( $depth == 0 && strpos( $class_names, 'menu-item-has-children' ) !== false ) {
+			$atts['aria-haspopup'] = 'true';
+			$atts['aria-owns'] = $atts['aria-controls'] = 'sub-menu-for-' . $item->ID;
+			$atts['aria-expanded'] = 'false';
+		}
 
 		/**
 		 * Filter the HTML attributes applied to a menu item's anchor element.
