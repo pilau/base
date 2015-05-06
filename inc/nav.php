@@ -93,7 +93,7 @@ class Pilau_Walker_Nav_Menu extends Walker_Nav_Menu {
 		// Seems to be the only way of getting ID of parent...
 		if ( preg_match_all( '/ id="menu-item-([0-9]+)"/', $output, $matches, PREG_PATTERN_ORDER ) !== false ) {
 			$parent_id = end( $matches[1] );
-			$accessibility_attributes = ' id="sub-menu-for-' . $parent_id . '" role="group" aria-expanded="false" aria-labelledby="menu-item-' . $parent_id . '"';
+			$accessibility_attributes = ' id="sub-menu-for-' . $parent_id . '" role="group" aria-labelledby="menu-item-' . $parent_id . '"';
 		}
 
 		// Add to output
@@ -129,8 +129,9 @@ class Pilau_Walker_Nav_Menu extends Walker_Nav_Menu {
 	 */
 	public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 		$indent = ( $depth ) ? str_repeat( "\t", $depth ) : '';
-
 		$classes = empty( $item->classes ) ? array() : (array) $item->classes;
+		$li_atts = array();
+		$a_atts = array();
 		//$classes[] = 'menu-item-' . $item->ID;
 
 		// Strip out some unnecessary classes
@@ -161,8 +162,7 @@ class Pilau_Walker_Nav_Menu extends Walker_Nav_Menu {
 		 * @param array  $args    An array of {@see wp_nav_menu()} arguments.
 		 * @param int    $depth   Depth of menu item. Used for padding.
 		 */
-		$class_names = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
-		$class_names = $class_names ? ' class="' . esc_attr( $class_names ) . '"' : '';
+		$li_atts['class'] = join( ' ', apply_filters( 'nav_menu_css_class', array_filter( $classes ), $item, $args, $depth ) );
 
 		/**
 		 * Filter the ID applied to a menu item's list item element.
@@ -174,26 +174,39 @@ class Pilau_Walker_Nav_Menu extends Walker_Nav_Menu {
 		 * @param array  $args    An array of {@see wp_nav_menu()} arguments.
 		 * @param int    $depth   Depth of menu item. Used for padding.
 		 */
-		$id = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args, $depth );
-		$id = $id ? ' id="' . esc_attr( $id ) . '"' : '';
-
-		$output .= $indent . '<li' . $id . $class_names . '>';
-
-		$atts = array();
-		$atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
-		$atts['target'] = ! empty( $item->target )     ? $item->target     : '';
-		$atts['rel']    = ! empty( $item->xfn )        ? $item->xfn        : '';
-		$atts['href']   = ! empty( $item->url )        ? $item->url        : '';
+		$li_atts['id'] = apply_filters( 'nav_menu_item_id', 'menu-item-'. $item->ID, $item, $args, $depth );
 
 		/**
 		 * ARIA attributes for keyboard accessibility
 		 *
 		 * @since	0.2
 		 */
-		if ( $depth == 0 && strpos( $class_names, 'menu-item-has-children' ) !== false ) {
-			$atts['aria-haspopup'] = 'true';
-			$atts['aria-owns'] = $atts['aria-controls'] = 'sub-menu-for-' . $item->ID;
-			$atts['aria-expanded'] = 'false';
+		if ( $depth == 0 && strpos( $li_atts['class'], 'menu-item-has-children' ) !== false ) {
+			$li_atts['aria-expanded'] = 'false';
+		}
+
+		$attributes = '';
+		foreach ( $li_atts as $attr => $value ) {
+			if ( ! empty( $value ) ) {
+				$attributes .= ' ' . $attr . '="' . esc_attr( $value ) . '"';
+			}
+		}
+
+		$output .= $indent . '<li' . $attributes . '>';
+
+		$a_atts['title']  = ! empty( $item->attr_title ) ? $item->attr_title : '';
+		$a_atts['target'] = ! empty( $item->target )     ? $item->target     : '';
+		$a_atts['rel']    = ! empty( $item->xfn )        ? $item->xfn        : '';
+		$a_atts['href']   = ! empty( $item->url )        ? $item->url        : '';
+
+		/**
+		 * ARIA attributes for keyboard accessibility
+		 *
+		 * @since	0.2
+		 */
+		if ( $depth == 0 && strpos( $li_atts['class'], 'menu-item-has-children' ) !== false ) {
+			$a_atts['aria-haspopup'] = 'true';
+			$a_atts['aria-owns'] = $atts['aria-controls'] = 'sub-menu-for-' . $item->ID;
 		}
 
 		/**
@@ -213,10 +226,10 @@ class Pilau_Walker_Nav_Menu extends Walker_Nav_Menu {
 		 * @param array  $args  An array of {@see wp_nav_menu()} arguments.
 		 * @param int    $depth Depth of menu item. Used for padding.
 		 */
-		$atts = apply_filters( 'nav_menu_link_attributes', $atts, $item, $args, $depth );
+		$a_atts = apply_filters( 'nav_menu_link_attributes', $a_atts, $item, $args, $depth );
 
 		$attributes = '';
-		foreach ( $atts as $attr => $value ) {
+		foreach ( $a_atts as $attr => $value ) {
 			if ( ! empty( $value ) ) {
 				$value = ( 'href' === $attr ) ? esc_url( $value ) : esc_attr( $value );
 				$attributes .= ' ' . $attr . '="' . $value . '"';
