@@ -219,6 +219,12 @@ if ( ! function_exists( 'pilau_responsive_image' ) ) {
 			}
 		}
 
+		// Full width needs independent attention
+		if ( in_array( 'full-width', $srcset_sizes ) ) {
+			$image_metadata = wp_get_attachment_image_src( $image_id, 'full-width' );
+			$srcset[] = $image_metadata[0] . ' ' . $image_metadata[1] . 'w';
+		}
+
 		// Generate the markup
 		$output .= '<img src="' . pilau_get_image_url( $image_id, $default_size ) . '" srcset="' . implode( ', ', $srcset ) . '" sizes="' . implode( ', ', $sizes ) . '" alt="' . $alt . '" class="' . implode( ' ', $classes ) . '">';
 
