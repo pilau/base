@@ -11,7 +11,7 @@ Pilau theming is split into a parent theme (Base) and a child theme (Starter) so
 
 There's also a number of Pilau [WordPress plugins](https://github.com/pilau/base/wiki/Pilau-plugins).
 
-For documentation, [check out the wiki](https://github.com/pilau/base/wiki).
+For more information, [check out the wiki](https://github.com/pilau/base/wiki).
 
 Pilau uses code and inspiration from the following projects:
 
