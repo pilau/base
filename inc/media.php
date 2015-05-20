@@ -173,7 +173,8 @@ if ( ! function_exists( 'pilau_responsive_image' ) ) {
 	/**
 	 * Generate image markup using the srcset and sizes attributes for the <img> element
 	 *
-	 * Make sure you populate $pilau_image_sizes in pilau_setup_media() in the starter theme
+	 * - Make sure you populate $pilau_image_sizes in pilau_setup_media() in the starter theme
+	 * - For proper browser support, enqueue the Picturefill script in the starter theme
 	 *
 	 * @since	Pilau_Base 0.2
 	 * @link	https://css-tricks.com/responsive-images-youre-just-changing-resolutions-use-srcset/
@@ -189,9 +190,11 @@ if ( ! function_exists( 'pilau_responsive_image' ) ) {
 	 * 									an attempt to grab the alt text from the attachment, with title
 	 * 									as a fallback
 	 * @param	array	$classes
+	 * @param	array	$picture_srcs	An array of arrays, each with a 'media' key/value and a 'srcset'
+	 * 									key/value, for each source element
 	 * @return	string
 	 */
-	function pilau_responsive_image( $image_id, $srcset_sizes = null, $default_size = 'full', $sizes = null, $alt = null, $classes = array() ) {
+	function pilau_responsive_image( $image_id, $srcset_sizes = null, $default_size = 'full', $sizes = null, $alt = null, $classes = array(), $picture_srcs = array() ) {
 		global $pilau_image_sizes;
 		$output = '';
 
@@ -226,7 +229,16 @@ if ( ! function_exists( 'pilau_responsive_image' ) ) {
 		}
 
 		// Generate the markup
-		$output .= '<img src="' . pilau_get_image_url( $image_id, $default_size ) . '" srcset="' . implode( ', ', $srcset ) . '" sizes="' . implode( ', ', $sizes ) . '" alt="' . $alt . '" class="' . implode( ' ', $classes ) . '">';
+		$output .= '<img src="' . esc_url( pilau_get_image_url( $image_id, $default_size ) ) . '" srcset="' . esc_attr( implode( ', ', $srcset ) ) . '" sizes="' . esc_attr( implode( ', ', $sizes ) ) . '" alt="' . esc_attr( $alt ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '">';
+
+		// Using <picture> for art direction?
+		if ( ! empty( $picture_srcs ) ) {
+			foreach ( $picture_srcs as $picture_src ) {
+				$output = '<source media="' . esc_attr( $picture_src['media'] ) . '" srcset="' . esc_attr( $picture_src['srcset'] ) . '">' . "\n" . $output;
+			}
+			$output = '<!--[if IE 9]><video style="display: none;"><![endif]-->' . "\n" . $output . "\n" . '<!--[if IE 9]></video><![endif]-->' . "\n";
+			$output = '<picture>' . "\n" . $output . '</picture>' . "\n";
+		}
 
 		return $output;
 	}
