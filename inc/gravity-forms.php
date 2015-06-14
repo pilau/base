@@ -4,14 +4,14 @@
  * Gravity Forms
  *
  * @package	Pilau_Base
- * @since	0.2
+ * @since	2.0
  */
 
 
 /**
  * Return a field from a form object, based on a field meta value
  *
- * @since	0.2
+ * @since	2.0
  * @param	array	$form
  * @param	string	$field_meta_key
  * @param	string	$field_meta_value
@@ -62,7 +62,7 @@ function pilau_gf_get_field( $form, $field_meta_key, $field_meta_value, $checked
 /**
  * Return a value from a submitted form / entry combination
  *
- * @since	0.2
+ * @since	2.0
  * @param	array	$form
  * @param	array	$entry
  * @param	string	$label				Label of field

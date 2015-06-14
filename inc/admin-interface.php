@@ -4,7 +4,7 @@
  * Admin interface customization
  *
  * @package	Pilau_Base
- * @since	0.2
+ * @since	2.0
  * @todo	Selectively remove post category / link category options on options-writing.php
  */
 
@@ -13,7 +13,7 @@ add_action( 'add_meta_boxes', 'pilau_base_remove_meta_boxes', 1 );
 /**
  * Remove meta boxes
  *
- * @since	Pilau_Base 0.2
+ * @since	Pilau_Base 2.0
  */
 function pilau_base_remove_meta_boxes() {
 
@@ -35,7 +35,7 @@ add_action( 'admin_init', 'pilau_base_customize_list_columns' );
  * For the most part these should be handled by the Codepress Admin Columns plugin.
  * Include any necessary overrides here.
  *
- * @since	Pilau_Base 0.2
+ * @since	Pilau_Base 2.0
  */
 function pilau_base_customize_list_columns() {
 	add_filter( 'manage_edit-post_columns', 'pilau_base_admin_columns', 10000, 1 );
@@ -48,7 +48,7 @@ function pilau_base_customize_list_columns() {
 /**
  * Global handler for all post type columns
  *
- * @since	Pilau_Base 0.2
+ * @since	Pilau_Base 2.0
  *
  * @param	array $cols
  * @return	array
@@ -74,7 +74,7 @@ add_action( 'wp_dashboard_setup', 'pilau_base_disable_default_dashboard_widgets'
 /**
  * Disable default dashboard widgets
  *
- * @since	Pilau_Base 0.2
+ * @since	Pilau_Base 2.0
  * @link	http://codex.wordpress.org/Dashboard_Widgets_API
  */
 function pilau_base_disable_default_dashboard_widgets() {
@@ -94,7 +94,7 @@ function pilau_base_disable_default_dashboard_widgets() {
  *
  * Gets the current tab from $_GET['tab']; defaults to the first tab supplied
  *
- * @since	Pilau_Base 0.2
+ * @since	Pilau_Base 2.0
  * @param	array	$tabs		In the format:
  * 								<code>array( 'slug1' => 'Title 1', 'slug2' => 'Title 2' )</code>
  * @param	string	$base_url	Base URL for admin screen
@@ -114,7 +114,7 @@ function pilau_admin_tabs( $tabs, $base_url ) {
 /**
  * Get the current tab in an admin screen
  *
- * @since	Pilau_Base 0.2
+ * @since	Pilau_Base 2.0
  * @param	array	$tabs	In the format:
  * 							<code>array( 'slug1' => 'Title 1', 'slug2' => 'Title 2' )</code>
  * @return	string

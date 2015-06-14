@@ -4,7 +4,7 @@
  * General admin stuff
  *
  * @package	Pilau_Base
- * @since	0.2
+ * @since	2.0
  */
 
 
@@ -13,7 +13,7 @@
 /**
  * Admin interface customization
  *
- * @since	Pilau_Base 0.2
+ * @since	Pilau_Base 2.0
  */
 require( dirname( __FILE__ ) . '/admin-interface.php' );
 
@@ -22,7 +22,7 @@ add_action( 'admin_init', 'pilau_base_admin_init', 1 );
 /**
  * Admin initialization
  *
- * @since	Pilau_Base 0.2
+ * @since	Pilau_Base 2.0
  */
 function pilau_base_admin_init() {
 
@@ -34,7 +34,7 @@ if ( ! function_exists( 'pilau_slug_length' ) ) {
 	/**
 	 * Limit length of slugs
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 */
 	function pilau_slug_length( $slug ) {
 		$maxwords = PILAU_SLUG_LENGTH;
@@ -53,7 +53,7 @@ if ( PILAU_IGNORE_UPDATES_FOR_INACTIVE_PLUGINS ) {
 /**
  * Ignore updates for inactive plugins
  *
- * @since	Pilau_Base 0.2
+ * @since	Pilau_Base 2.0
  * @link	http://bloke.org/wordpress/remove-plugin-update-notice-only-for-inactive-plugins/
  */
 function pilau_update_active_plugins( $value = '' ) {
@@ -95,7 +95,7 @@ if ( defined( 'DW_VERSION' ) ) {
 	/**
 	 * A workaround to fix the Dynamic Widgets lists of CPTs
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 */
 	function pilau_dynwid_cpt_fix( $query ) {
 		if ( isset( $_GET['page'] ) && $_GET['page'] == 'dynwid-config' && isset( $_GET['action'] ) && $_GET['action'] == 'edit' ) {

@@ -4,7 +4,7 @@
  * Content functionality
  *
  * @package	Pilau_Base
- * @since	0.2
+ * @since	2.0
  */
 
 
@@ -12,7 +12,7 @@ if ( ! function_exists( 'pilau_content' ) ) {
 	/**
 	 * Custom handling of content output
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 * @uses	get_the_content()
 	 * @uses	pilau_extract()
 	 * @uses	get_the_excerpt()
@@ -80,7 +80,7 @@ if ( ! function_exists( 'pilau_description_or_extract' ) ) {
 	 * If there's a description set by Yoast SEO or Developer's Custom Fields, returns
 	 * that; otherwise, returns a content extract. Content is always tidied up, i.e. no HTML tags.
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 * @uses	slt_cf_field_value()
 	 * @uses	get_post()
 	 * @uses	pilau_extract()
@@ -122,7 +122,7 @@ if ( ! function_exists( 'pilau_not_found' ) ) {
 	/**
 	 * "Not found" fragment
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 *
 	 * @param	string	$title
 	 * @return	void
@@ -149,7 +149,7 @@ if ( ! function_exists( 'pilau_404_title' ) ) {
 	 *
 	 * To be hooked as a filter onto wp_title when needed.
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 *
 	 * @param	string	$title
 	 * @param	string	$sep

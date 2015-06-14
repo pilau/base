@@ -4,7 +4,7 @@
  * Initial theme setup
  *
  * @package	Pilau_Base
- * @since	0.2
+ * @since	2.0
  */
 
 
@@ -12,7 +12,7 @@ add_action( 'after_setup_theme', 'pilau_base_setup', 1 );
 /**
  * Set up theme
  *
- * @since	Pilau_Base 0.2
+ * @since	Pilau_Base 2.0
  */
 function pilau_base_setup() {
 	global $post;
@@ -41,7 +41,7 @@ if ( ! function_exists( 'pilau_remove_title_attributes' ) ) {
 	/**
 	 * Remove unnecessary title attributes from page list links
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 */
 	function pilau_remove_title_attributes( $input ) {
 		return preg_replace( '/\s*title\s*=\s*(["\']).*?\1/', '', $input );

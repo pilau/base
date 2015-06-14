@@ -4,7 +4,7 @@
  * Library of general helper functions
  *
  * @package	Pilau_Base
- * @since	0.2
+ * @since	2.0
  */
 
 
@@ -17,7 +17,7 @@ if ( ! function_exists( 'pilau_default_user_display_name' ) ) {
 	/**
 	 * Better default display name for users
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 *
 	 * @uses	get_user_meta()
 	 * @uses	wp_update_user()
@@ -37,7 +37,7 @@ if ( ! function_exists( 'pilau_get_user_role' ) ) {
 	/**
 	 * Get a WordPress user's role
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @uses	$wpdb
 	 * @uses	maybe_unserialize()
@@ -89,7 +89,7 @@ if ( ! function_exists( 'pilau_get_user_with_meta' ) ) {
 	 * Currently doesn't work with meta fields that have multiple values -
 	 * only the first is returned.
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @uses	get_userdata()
 	 * @uses	get_user_meta()
@@ -120,7 +120,7 @@ if ( ! function_exists( 'pilau_get_the_term' ) ) {
 	/**
 	 * Get a single term associated with a post
 	 *
-	 * @since 0.2
+	 * @since 2.0
 	 *
 	 * @param	int						$post_id	Defaults to current post ID
 	 * @param	string					$taxonomy
@@ -155,7 +155,7 @@ if ( ! function_exists( 'pilau_objects_array_values' ) ) {
 	/**
 	 * Return an array of values from a specific key in each object in an array of objects
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @param	string		$needle_key	The property to search for inside the array's objects
 	 * @param	array		$haystack	The array of objects
@@ -182,7 +182,7 @@ if ( ! function_exists( 'pilau_search_object_array' ) ) {
 	/**
 	 * Search an array of objects for property value
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @param	string		$needle_key		The key being searched for
 	 * @param	string		$needle_val		The value being searched for
@@ -220,7 +220,7 @@ if ( ! function_exists( 'pilau_value_exists' ) ) {
 	/**
 	 * Check that array key or object property exists and there's a value
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @param	string	$needle		The key or property name
 	 * @param	mixed	$haystack	The array or object
@@ -241,7 +241,7 @@ if ( ! function_exists( 'pilau_search_arrays_in_array' ) ) {
 	/**
 	 * Search arrays in an array for a value, and return the key of the first matching array
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @param	string			$needle		The value being searched for
 	 * @param	array			$haystack	An array of arrays
@@ -264,7 +264,7 @@ if ( ! function_exists( 'pilau_trim_array' ) ) {
 	/**
 	 * Trim every string value in an array
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @param	array	$array
 	 * @param	string	$charlist	Optional. List of characters to trim. Null (default) trims whitespace
@@ -291,7 +291,7 @@ if ( ! function_exists( 'pilau_explode_constants' ) ) {
 	/**
 	 * A quick way to explode lists stored in constants into the global scope
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @param	array	$constants	An array of the names of constants to explode
 	 * @param	string	$sep		Optional. The character used as a separator
@@ -319,7 +319,7 @@ if ( ! function_exists( 'pilau_obfuscate_text' ) ) {
 	/**
 	 * Email obfuscator
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 *
 	 * @link	http://bla.st/
 	 * @link	http://macromates.com/
@@ -347,7 +347,7 @@ if ( ! function_exists( 'pilau_obfuscate_email' ) ) {
 	/**
 	 * Given an email address, creates a nice obfuscated <a href="mailto:email">email</a> style address
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 * @uses	pilau_obfuscate_text()
 	 * @param	string	$email
 	 * @param	bool	$icon
@@ -379,7 +379,7 @@ if ( ! function_exists( 'pilau_obfuscate_email' ) ) {
 /**
  * Create a hyperlink for phone numbers
  *
- * @since	Pilau_Base 0.2
+ * @since	Pilau_Base 2.0
  *
  * @param	string		$number
  * @param	string		$country_code
@@ -394,7 +394,7 @@ if ( ! function_exists( 'pilau_extract' ) ) {
 	/**
 	 * Get an extract from a string, trimming by words or paragraphs
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 *
 	 * @uses	strip_shortcodes()
 	 * @uses	do_shortcode()
@@ -441,7 +441,7 @@ if ( ! function_exists( 'pilau_get_current_url' ) ) {
 	/**
 	 * Get the current URL
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 *
 	 * @uses	trailingslashit()
 	 *
@@ -508,7 +508,7 @@ if ( ! function_exists( 'pilau_path_from_url' ) ) {
 	/**
 	 * Return a path from a URL
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 *
 	 * @uses	pilau_get_current_url()
 	 *
@@ -529,7 +529,7 @@ if ( ! function_exists( 'pilau_url_to_postid' ) ) {
 	/**
 	 * Wrapper that extends the core url_to_postid() function
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 *
 	 * @uses	url_to_postid()
 	 * @uses	get_post_types()
@@ -581,7 +581,7 @@ if ( ! function_exists( 'pilau_get_image_url' ) ) {
 	/**
 	 * Get URL of an image
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 *
 	 * @uses	wp_get_attachment_image_src()
 	 *
@@ -600,7 +600,7 @@ if ( ! function_exists( 'pilau_get_featured_image_url' ) ) {
 	/**
 	 * Get URL of a post's featured image
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 *
 	 * @uses	pilau_get_image_url()
 	 * @uses	get_post_thumbnail_id()
@@ -621,7 +621,7 @@ if ( ! function_exists( 'pilau_construct_website_url' ) ) {
 	/**
 	 * Construct URL for website based on user ID
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 * @param	string	$website	'facebook' | 'twitter' | 'google+' | 'pinterest' | 'linkedin' | 'youtube' | 'instagram' | 'foursquare'
 	 * @param	string	$id
 	 * @return	string
@@ -689,7 +689,7 @@ if ( ! function_exists( 'pilau_link_urls' ) ) {
 	 *
 	 * @link	http://stackoverflow.com/questions/1960461/convert-plain-text-urls-into-html-hyperlinks-in-php
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 *
 	 * @param	string	$s
 	 * @return	string
@@ -708,7 +708,7 @@ if ( ! function_exists( 'pilau_menu_without_containers' ) ) {
 	/**
 	 * Get nav menu without markup containers
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 *
 	 * @uses	wp_nav_menu()
 	 *
@@ -750,7 +750,7 @@ if ( ! function_exists( 'pilau_is_plugin_installed' ) ) {
 	/**
 	 * Is a plugin installed?
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 *
 	 * @uses	$pilau_wp_plugins
 	 *
@@ -771,7 +771,7 @@ if ( ! function_exists( 'pilau_is_plugin_installed' ) ) {
 /**
  * Update an option in a serialized option
  *
- * @since	0.2
+ * @since	2.0
  * @param	string	$option
  * @param	string	$key
  * @param	mixed	$value
@@ -788,7 +788,7 @@ if ( ! function_exists( 'pilau_undo_magic_quotes' ) ) {
 	/**
 	 * Remove magic quotes slashes
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @param	string	$string
 	 * @return	string
@@ -806,7 +806,7 @@ if ( ! function_exists( 'pilau_format_filesize' ) ) {
 	/**
 	 * Return the formatted size of a file.
 	 *
-	 * @since 0.1
+	 * @since 1.0
 	 *
 	 * @uses size_format()
 	 *
@@ -839,7 +839,7 @@ if ( ! function_exists( 'pilau_format_filesize' ) ) {
 /**
  * Make sure file type is simple
  *
- * @since	Pilau_Base 0.2
+ * @since	Pilau_Base 2.0
  *
  * @param	mixed	$type
  * @return	string
@@ -907,7 +907,7 @@ function pilau_simple_file_type( $type ) {
  *
  * @link	http://stackoverflow.com/questions/5266945/wordpress-how-detect-if-current-page-is-the-login-page
  *
- * @since	Pilau_Base 0.2
+ * @since	Pilau_Base 2.0
  *
  * @return	bool
  */
@@ -919,7 +919,7 @@ function pilau_is_login_page() {
 /**
  * Wrapper for core checked() which can handle arrays
  *
- * @since	0.2
+ * @since	2.0
  * @param	mixed	$checked
  * @param	mixed	$current
  * @param	bool	$echo

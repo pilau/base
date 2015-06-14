@@ -4,7 +4,7 @@
  * Media functions
  *
  * @package	Pilau_Base
- * @since	0.2
+ * @since	2.0
  */
 
 
@@ -12,7 +12,7 @@ if ( ! function_exists( 'pilau_wmode_opaque' ) ) {
 	/**
 	 * Add wmode parameter to Flash embeds to avoid z-index issue
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 */
 	add_filter( 'oembed_result', 'pilau_wmode_opaque', 10, 3 );
 	function pilau_wmode_opaque( $html, $url, $args ) {
@@ -35,7 +35,7 @@ if ( ! function_exists( 'pilau_video_or_image' ) ) {
 	/**
 	 * Try to output a video or an image
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 *
 	 * @uses	wp_oembed_get()
 	 * @uses	esc_url()
@@ -62,7 +62,7 @@ if ( ! function_exists( 'pilau_image_maybe_caption' ) ) {
 	/**
 	 * Output an image with optional caption, using <figure> and <figcaption> tags
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 *
 	 * @param	int				$image_id		ID of the image
 	 * @param	string			$size			Size of the image; defaults to 'post-thumbnail'
@@ -122,7 +122,7 @@ if ( ! function_exists( 'pilau_img_defer_load' ) ) {
 	/**
 	 * Ouput an image, with optional deferred loading
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 * @link	http://24ways.org/2010/speed-up-your-site-with-delayed-content/
 	 *
 	 * @param	mixed	$image	Either an attachment ID, or an array with 'width', 'height', 'src'
@@ -176,7 +176,7 @@ if ( ! function_exists( 'pilau_responsive_image' ) ) {
 	 * - Make sure you populate $pilau_image_sizes in pilau_setup_media() in the starter theme
 	 * - For proper browser support, enqueue the Picturefill script in the starter theme
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 * @link	https://css-tricks.com/responsive-images-youre-just-changing-resolutions-use-srcset/
 	 * @link	http://ericportis.com/posts/2014/srcset-sizes/
 	 *
@@ -249,7 +249,7 @@ if ( ! function_exists( 'pilau_responsive_picture' ) ) {
 	/**
 	 * Generate image markup using the <picture> element for responsive sizes
 	 *
-	 * @since	Pilau_Base 0.2
+	 * @since	Pilau_Base 2.0
 	 * @link	http://scottjehl.github.io/picturefill/
 	 * @link	http://www.bobz.co/responsive-images-picturefill-wordpress-theme-development/
 	 *

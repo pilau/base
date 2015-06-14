@@ -14,7 +14,7 @@
  * the child depends on.
  *
  * @package	Pilau_Base
- * @since	0.2
+ * @since	2.0
  *
  */
 

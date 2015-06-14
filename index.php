@@ -7,7 +7,7 @@
  * overridden, and is included here so Pilau Base is not seen as "broken" by WP
  *
  * @package	Pilau_Base
- * @since	0.2
+ * @since	2.0
  */
 
 ?>

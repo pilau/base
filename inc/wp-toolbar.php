@@ -5,7 +5,7 @@ add_action( 'admin_bar_menu', 'pilau_base_customize_toolbar', 10000 );
  * WordPress Toolbar customization (formerly admin bar)
  *
  * @package	Pilau_Base
- * @since	0.2
+ * @since	2.0
  * @link	http://www.sitepoint.com/change-wordpress-33-toolbar/
  */
 function pilau_base_customize_toolbar( $toolbar ) {
