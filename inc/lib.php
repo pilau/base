@@ -433,6 +433,22 @@ if ( ! function_exists( 'pilau_extract' ) ) {
 }
 
 
+/**
+ * Convert a string of one-liners into an array
+ *
+ * Eliminates empty lines and trims all whitespace
+ *
+ * @since	2.1.1
+ * @param	string	$string
+ * @return	array
+ */
+function pilau_string_of_one_liners_to_array( $string ) {
+	return array_filter( explode( "\n", trim( $string ) ), function( $s ) {
+		return trim( $s );
+	});
+}
+
+
 /* URLs
 *****************************************************************************/
 

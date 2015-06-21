@@ -1,5 +1,8 @@
 # Changelog for Pilau Base
 
+## 2.1.1 (2015-06-21)
+* `pilau_string_of_one_liners_to_array()`
+
 ## 2.1 (2015-06-14)
 * Support for `<picture>` element art direction in `pilau_responsive_image()`
 
