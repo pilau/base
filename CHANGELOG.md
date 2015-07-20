@@ -1,5 +1,8 @@
 # Changelog for Pilau Base
 
+## 2.1.2 (????-??-??)
+* Refresh button in admin toolbar for admin as well as front-end
+
 ## 2.1.1 (2015-06-21)
 * `pilau_string_of_one_liners_to_array()`
 
