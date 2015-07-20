@@ -15,16 +15,11 @@ function pilau_base_customize_toolbar( $toolbar ) {
 		$toolbar->remove_node( 'comments' );
 	}
 
-	/* For the front-end  */
-	if ( ! is_admin() ) {
-
-		/* Generic refreshing of any data cached by theme */
-		$toolbar->add_node(array(
-			'id'		=> 'refresh',
-			'title'		=> 'Refresh',
-			'href'		=> '?refresh=1'
-		));
-
-	}
+	/* Generic refreshing of any data cached by theme */
+	$toolbar->add_node(array(
+		'id'		=> 'refresh',
+		'title'		=> 'Refresh',
+		'href'		=> add_query_arg( 'refresh', 1 ),
+	));
 
 }
