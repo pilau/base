@@ -233,11 +233,11 @@ if ( ! function_exists( 'pilau_responsive_image' ) ) {
 
 		// Using <picture> for art direction?
 		if ( ! empty( $picture_srcs ) ) {
+			$sources = '';
 			foreach ( $picture_srcs as $picture_src ) {
-				$output = '<source media="' . esc_attr( $picture_src['media'] ) . '" srcset="' . esc_attr( $picture_src['srcset'] ) . '">' . "\n" . $output;
+				$sources .= '<source media="' . esc_attr( $picture_src['media'] ) . '" srcset="' . esc_attr( $picture_src['srcset'] ) . '">' . "\n";
 			}
-			$output = '<!--[if IE 9]><video style="display: none;"><![endif]-->' . "\n" . $output . "\n" . '<!--[if IE 9]></video><![endif]-->' . "\n";
-			$output = '<picture>' . "\n" . $output . '</picture>' . "\n";
+			$output = '<picture>' . "\n" . '<!--[if IE 9]><video style="display: none;"><![endif]-->' . "\n" . $sources . "\n" . '<!--[if IE 9]></video><![endif]-->' . "\n" . $output . "\n" . '</picture>' . "\n";
 		}
 
 		return $output;
