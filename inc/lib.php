@@ -386,7 +386,16 @@ if ( ! function_exists( 'pilau_obfuscate_email' ) ) {
  * @return	string
  */
 function pilau_phone_link( $number, $country_code = '44' ) {
-	return 'tel:+' . $country_code .  preg_replace( '/[^0-9]/', '', ltrim( $number, 0 ) );
+
+	// Strip non-numeric characters
+	$number =  preg_replace( '/[^0-9]/', '', $number );
+
+	// Strip country code if present, then add back in after stripping leading zero
+	$number = ltrim( $number, $country_code );
+	$number = ltrim( $number, '0' );
+	$number = $country_code . $number;
+
+	return 'tel:+' . $number;
 }
 
 
