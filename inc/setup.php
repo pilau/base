@@ -47,3 +47,17 @@ if ( ! function_exists( 'pilau_remove_title_attributes' ) ) {
 		return preg_replace( '/\s*title\s*=\s*(["\']).*?\1/', '', $input );
 	}
 }
+
+
+add_filter( 'cmb2_meta_box_url', 'pilau_cmb2_meta_box_url' );
+/**
+ * Hack to handle symlinked CMB2 in local dev
+ *
+ * @since	Pilau_Base 2.1.2
+ */
+function pilau_cmb2_meta_box_url( $url ) {
+	if ( defined( 'WP_LOCAL_DEV' ) && WP_LOCAL_DEV ) {
+		$url = plugins_url( 'cmb2/' );
+	}
+	return $url;
+}
