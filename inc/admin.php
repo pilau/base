@@ -29,6 +29,56 @@ function pilau_base_admin_init() {
 }
 
 
+if ( ! function_exists( 'pilau_slug_stopwords' ) ) {
+	add_filter( 'name_save_pre', 'pilau_slug_stopwords', 0 );
+	/**
+	 * Remove stopwords from slugs
+	 *
+	 * Based on SEO Slugs plugin
+	 *
+	 * @since	Pilau_Base 2.1.3
+	 */
+	function pilau_slug_stopwords( $slug ) {
+
+		if ( empty( $slug ) && ! empty( $_POST['post_title'] ) ) {
+
+			// Standard sanitisation
+			$slug = sanitize_title( $_POST['post_title'] );
+
+			// Turn it to an array to strip stopwords
+			$slug_array = explode( '-', $slug );
+			$seo_slug_array = array_diff( $slug_array, pilau_get_stopwords() );
+
+			// If there's nothing left, default to first word of original
+			if ( empty( $seo_slug_array ) ) {
+				$seo_slug_array = reset( $slug_array );
+			}
+
+			// Back to strong
+			$slug = implode( '-', $seo_slug_array );
+
+		}
+
+		return $slug;
+	}
+}
+
+
+if ( ! function_exists( 'pilau_get_stopwords' ) ) {
+	/**
+	 * Get stopwords
+	 *
+	 * Based on Yoast SEO plugin
+	 *
+	 * @since	Pilau_Base 2.1.3
+	 * @return	array
+	 */
+	function pilau_get_stopwords() {
+		return explode( ',', __( "a,about,above,after,again,against,all,am,an,and,any,are,as,at,be,because,been,before,being,below,between,both,but,by,could,did,do,does,doing,down,during,each,few,for,from,further,had,has,have,having,he,he'd,he'll,he's,her,here,here's,hers,herself,him,himself,his,how,how's,i,i'd,i'll,i'm,i've,if,in,into,is,it,it's,its,itself,let's,me,more,most,my,myself,nor,of,on,once,only,or,other,ought,our,ours,ourselves,out,over,own,same,she,she'd,she'll,she's,should,so,some,such,than,that,that's,the,their,theirs,them,themselves,then,there,there's,these,they,they'd,they'll,they're,they've,this,those,through,to,too,under,until,up,very,was,we,we'd,we'll,we're,we've,were,what,what's,when,when's,where,where's,which,while,who,who's,whom,why,why's,with,would,you,you'd,you'll,you're,you've,your,yours,yourself,yourselves", 'wordpress-seo' ) );
+	}
+}
+
+
 if ( ! function_exists( 'pilau_slug_length' ) ) {
 	add_filter( 'name_save_pre', 'pilau_slug_length', 10 );
 	/**

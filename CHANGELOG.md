@@ -1,5 +1,9 @@
 # Changelog for Pilau Base
 
+## 2.1.3 (2015-08-19)
+* Added slug stopwords removal to compensate for Yoast SEO not working
+* Removed CMB2 symlink hack (handled in Pilau Starter)
+
 ## 2.1.2 (2015-08-18)
 * Refresh button in admin toolbar for admin as well as front-end
 * Fix for IE9 sources hack in `pilau_responsive_image()`
