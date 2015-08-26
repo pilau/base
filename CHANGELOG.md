@@ -1,5 +1,8 @@
 # Changelog for Pilau Base
 
+## 2.2 (????-??-??)
+* 
+
 ## 2.1.3 (2015-08-19)
 * Added slug stopwords removal to compensate for Yoast SEO not working
 * Removed CMB2 symlink hack (handled in Pilau Starter)
