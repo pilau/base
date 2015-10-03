@@ -2,6 +2,7 @@
 
 ## 2.2 (????-??-??)
 * `pilau_get_users_by_capability()`
+* Adjusted `pilau_responsive_image` to work better with retina by default
 
 ## 2.1.3 (2015-08-19)
 * Added slug stopwords removal to compensate for Yoast SEO not working

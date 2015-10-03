@@ -199,6 +199,7 @@ if ( ! function_exists( 'pilau_responsive_image' ) ) {
 		$output = '';
 
 		// Defaults
+		$default_src = pilau_get_image_url( $image_id, $default_size );
 		if ( empty( $srcset_sizes ) ) {
 			$srcset_sizes = array( 'thumbnail', 'medium', 'large' );
 		}
@@ -215,7 +216,7 @@ if ( ! function_exists( 'pilau_responsive_image' ) ) {
 		}
 
 		// Build the srcset attribute
-		$srcset = array();
+		$srcset = array( $default_src );
 		foreach ( $srcset_sizes as $srcset_size ) {
 			if ( isset( $pilau_image_sizes[ $srcset_size ]['width'] ) ) {
 				$srcset[] = pilau_get_image_url( $image_id, $srcset_size ) . ' ' . $pilau_image_sizes[ $srcset_size ]['width'] . 'w';
@@ -229,7 +230,7 @@ if ( ! function_exists( 'pilau_responsive_image' ) ) {
 		}
 
 		// Generate the markup
-		$output .= '<img src="' . esc_url( pilau_get_image_url( $image_id, $default_size ) ) . '" srcset="' . esc_attr( implode( ', ', $srcset ) ) . '" sizes="' . esc_attr( implode( ', ', $sizes ) ) . '" alt="' . esc_attr( $alt ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '">';
+		$output .= '<img src="' . esc_url( $default_src ) . '" srcset="' . esc_attr( implode( ', ', $srcset ) ) . '" sizes="' . esc_attr( implode( ', ', $sizes ) ) . '" alt="' . esc_attr( $alt ) . '" class="' . esc_attr( implode( ' ', $classes ) ) . '">';
 
 		// Using <picture> for art direction?
 		if ( ! empty( $picture_srcs ) ) {
