@@ -26,6 +26,36 @@ function pilau_editable_roles( $roles ) {
 }
 
 
+add_filter( 'user_has_cap', 'pilau_edit_user_cap_protect_admins', 10, 3 );
+/**
+ * Make sure non-admins can't edit admin accounts
+ *
+ * @param	array	$allcaps	All the capabilities of the user
+ * @param	array	$cap		[0] Required capability
+ * @param	array	$args		[0] Requested capability
+ *								[1] User ID
+ *								[2] Associated object ID
+ * @return	array
+ */
+function pilau_edit_user_cap_protect_admins( $allcaps, $cap, $args ) {
+
+	// If the check is about editing or deleting users and the user is specified
+	if ( in_array( $args[0], array( 'edit_user', 'delete_user' ) ) && ! empty( $args[2] ) ) {
+
+		// Get the user
+		$user = new WP_User( $args[2] );
+
+		// If the user in question is an admin and the current user isn't...
+		if ( user_can( $user, 'update_core' ) && ! user_can( $args[1], 'update_core' ) ) {
+			$allcaps[ $args[0] . 's' ] = false;
+		}
+
+	}
+
+	return $allcaps;
+}
+
+
 if ( ! function_exists( 'pilau_default_user_display_name' ) ) {
 	add_action( 'user_register', 'pilau_default_user_display_name' );
 	/**
