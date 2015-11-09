@@ -8,6 +8,24 @@
  */
 
 
+add_filter( 'editable_roles', 'pilau_editable_roles' );
+/**
+ * Filter the editable roles list
+ *
+ * @since	2.2
+ * @uses	current_user_can()
+ */
+function pilau_editable_roles( $roles ) {
+
+	// Only admins should be able to update_core, and only admins can edit admins
+	if ( ! current_user_can( 'update_core' ) && array_key_exists( 'administrator', $roles ) ) {
+		unset( $roles['administrator'] );
+	}
+
+	return $roles;
+}
+
+
 if ( ! function_exists( 'pilau_default_user_display_name' ) ) {
 	add_action( 'user_register', 'pilau_default_user_display_name' );
 	/**
