@@ -1,6 +1,6 @@
 # Changelog for Pilau Base
 
-## 2.2 (????-??-??)
+## 2.2 (2015-11-09)
 * `pilau_get_users_by_capability()`
 * Adjusted `pilau_responsive_image` to work better with retina by default
 * Filter to prevent non-admins from creating admin accounts
