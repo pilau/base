@@ -30,6 +30,9 @@ add_filter( 'user_has_cap', 'pilau_edit_user_cap_protect_admins', 10, 3 );
 /**
  * Make sure non-admins can't edit admin accounts
  *
+ * @since	2.2
+ * @uses	WP_User
+ * @uses	user_can()
  * @param	array	$allcaps	All the capabilities of the user
  * @param	array	$cap		[0] Required capability
  * @param	array	$args		[0] Requested capability
