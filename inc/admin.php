@@ -37,25 +37,37 @@ if ( ! function_exists( 'pilau_slug_stopwords' ) ) {
 	 * Based on SEO Slugs plugin
 	 *
 	 * @since	Pilau_Base 2.1.3
+	 * @param	string	$slug
+	 * @param	string	$title
+	 * @return	string
 	 */
-	function pilau_slug_stopwords( $slug ) {
+	function pilau_slug_stopwords( $slug = '', $title = '' ) {
 
-		if ( empty( $slug ) && ! empty( $_POST['post_title'] ) ) {
+		if ( empty( $slug ) ) {
 
-			// Standard sanitisation
-			$slug = sanitize_title( $_POST['post_title'] );
-
-			// Turn it to an array to strip stopwords
-			$slug_array = explode( '-', $slug );
-			$seo_slug_array = array_diff( $slug_array, pilau_get_stopwords() );
-
-			// If there's nothing left, default to first word of original
-			if ( empty( $seo_slug_array ) ) {
-				$seo_slug_array = reset( $slug_array );
+			// Has a title been passed?
+			if ( empty( $title ) ) {
+				$title = $_POST['post_title'];
 			}
 
-			// Back to strong
-			$slug = implode( '-', $seo_slug_array );
+			if ( ! empty( $title ) ) {
+
+				// Standard sanitisation
+				$slug = sanitize_title( $title );
+
+				// Turn it to an array to strip stopwords
+				$slug_array = explode( '-', $slug );
+				$seo_slug_array = array_diff( $slug_array, pilau_get_stopwords() );
+
+				// If there's nothing left, default to first word of original
+				if ( empty( $seo_slug_array ) ) {
+					$seo_slug_array = reset( $slug_array );
+				}
+
+				// Back to string
+				$slug = implode( '-', $seo_slug_array );
+
+			}
 
 		}
 

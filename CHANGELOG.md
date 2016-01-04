@@ -1,5 +1,8 @@
 # Changelog for Pilau Base
 
+## 2.2.1 (????-??-??)
+* Changed `pilau_slug_stopwords()` so it can be used with a specified title
+
 ## 2.2 (2015-11-09)
 * `pilau_get_users_by_capability()`
 * Adjusted `pilau_responsive_image` to work better with retina by default
