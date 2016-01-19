@@ -2,6 +2,7 @@
 
 ## 2.2.1 (????-??-??)
 * Changed `pilau_slug_stopwords()` so it can be used with a specified title
+* Changed `pilau_gf_get_value()` as it didn't seem to be working; legacy code remains because it was tested with previous projects
 
 ## 2.2 (2015-11-09)
 * `pilau_get_users_by_capability()`
