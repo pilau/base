@@ -1,6 +1,6 @@
 # Changelog for Pilau Base
 
-## 2.2.1 (????-??-??)
+## 2.2.1 (2016-01-23)
 * Changed `pilau_slug_stopwords()` so it can be used with a specified title
 * Changed `pilau_gf_get_value()` as it didn't seem to be working; legacy code remains because it was tested with previous projects
 
