@@ -15,7 +15,7 @@ if ( ! function_exists( 'pilau_content' ) ) {
 	 * @since	Pilau_Base 2.0
 	 * @uses	get_the_content()
 	 * @uses	pilau_extract()
-	 * @uses	get_the_excerpt()
+	 * @uses	$post
 	 *
 	 * @param	string	$content	Content from WP post - defaults to current Loop content
 	 * @param	string	$action		'extended' (return text after more tag) | 'extract' (return text before more tag)
@@ -25,6 +25,7 @@ if ( ! function_exists( 'pilau_content' ) ) {
 	 * @return	string
 	 */
 	function pilau_content( $content = null, $action = "extract", $strip_imgs = true, $paras = 1, $filter = true ) {
+		global $post;
 		if ( is_null( $content ) ) {
 			$content = get_the_content();
 		}
@@ -52,9 +53,9 @@ if ( ! function_exists( 'pilau_content' ) ) {
 					$content = substr( $content, 0, ( $more_pos - 1 ) );
 				} else {
 					// No "more" tag, is there a specific excerpt set?
-					if ( $excerpt = get_the_excerpt() ) {
+					if ( ! empty( $post->post_excerpt ) ) {
 						// Use the excerpt
-						$content = $excerpt;
+						$content = apply_filters( 'the_excerpt', $post->post_excerpt );
 					} else {
 						// Get a manual extract
 						$content = pilau_extract( $content, 0, $paras );
