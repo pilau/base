@@ -8,6 +8,42 @@
  */
 
 
+/**
+ * Get all roles that can edit, create or publish posts or a certain type
+ *
+ * @link	http://themehybrid.com/weblog/correcting-the-author-meta-box-drop-down
+ * @since	2.2.2
+ *
+ * @param	string 	$post_type
+ * @return	array
+ */
+function pilau_get_roles_for_post_type( $post_type ) {
+	global $wp_roles;
+
+	$roles = array();
+	$type  = get_post_type_object( $post_type );
+
+	// Get the post type object caps.
+	$caps = array( $type->cap->edit_posts, $type->cap->publish_posts, $type->cap->create_posts );
+	$caps = array_unique( $caps );
+
+	// Loop through the available roles.
+	foreach ( $wp_roles->roles as $name => $role ) {
+
+		foreach ( $caps as $cap ) {
+
+			// If the role is granted the cap, add it.
+			if ( isset( $role['capabilities'][ $cap ] ) && true === $role['capabilities'][ $cap ] ) {
+				$roles[] = $name;
+				break;
+			}
+		}
+	}
+
+	return $roles;
+}
+
+
 add_filter( 'editable_roles', 'pilau_editable_roles' );
 /**
  * Filter the editable roles list
