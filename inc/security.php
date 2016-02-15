@@ -47,13 +47,12 @@ if ( ! function_exists( 'pilau_block_malicious_requests' ) ) {
 
 
 if ( ! function_exists( 'pilau_rss_version' ) ) {
-	add_filter( 'the_generator', 'pilau_rss_version' );
 	/**
 	 * Remove WP version from RSS
 	 *
 	 * @since	Pilau_Base 2.0
 	 */
-	function pilau_rss_version() { return ''; }
+	add_filter( 'the_generator', '__return_empty_string' );
 }
 
 
