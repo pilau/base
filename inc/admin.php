@@ -110,7 +110,7 @@ if ( ! function_exists( 'pilau_slug_length' ) ) {
 
 
 if ( PILAU_IGNORE_UPDATES_FOR_INACTIVE_PLUGINS ) {
-	add_filter('transient_update_plugins', 'update_active_plugins');
+	add_filter('transient_update_plugins', 'pilau_update_active_plugins');
 }
 /**
  * Ignore updates for inactive plugins

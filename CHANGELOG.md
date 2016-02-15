@@ -3,6 +3,7 @@
 ## 2.2.2 (????-??-??)
 * Changed `pilau_content()` to not use `get_the_excerpt()` (which uses content if there's no excerpt)
 * Added `pilau_get_roles_for_post_type()` (as part of fixing author meta box drop-down)
+* Fixed `pilau_update_active_plugins()` name in hook
 
 ## 2.2.1 (2016-01-23)
 * Changed `pilau_slug_stopwords()` so it can be used with a specified title
