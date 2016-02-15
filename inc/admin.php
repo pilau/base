@@ -46,7 +46,7 @@ if ( ! function_exists( 'pilau_slug_stopwords' ) ) {
 		if ( empty( $slug ) ) {
 
 			// Has a title been passed?
-			if ( empty( $title ) ) {
+			if ( empty( $title ) && ! empty( $_POST['post_title'] ) ) {
 				$title = $_POST['post_title'];
 			}
 
