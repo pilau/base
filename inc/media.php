@@ -24,7 +24,13 @@ if ( ! function_exists( 'pilau_wmode_opaque' ) ) {
 		}
 		if ( strpos( $html, '<iframe' ) !== false ) {
 			$html = str_replace( '<iframe', '<iframe wmode="opaque"', $html );
-			$html = preg_replace( '/ src="[^"\?]+\?/', '\0wmode=transparent&amp;', $html );
+			if ( preg_match( '/ src="[^"\?]+\?/', $html ) === 1 ) {
+				// Insert new query param when there's already a query string on the src
+				$html = preg_replace( '/ src="[^"\?]+\?/', '\0wmode=transparent&amp;', $html );
+			} else {
+				// Insert new query param when there's no query string
+				$html = preg_replace( '/( src="[^"]+)"/', '\1?wmode=transparent"', $html );
+			}
 		}
 		return $html;
 	}
