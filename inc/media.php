@@ -9,13 +9,17 @@
 
 
 if ( ! function_exists( 'pilau_wmode_opaque' ) ) {
+	add_filter( 'oembed_result', 'pilau_wmode_opaque' );
+	//add_filter( 'embed_oembed_html', 'pilau_wmode_opaque' );
 	/**
 	 * Add wmode parameter to Flash embeds to avoid z-index issue
 	 *
+	 * The embed_oembed_html hook may be necessary as well as oembed_result for when the embed
+	 * shortcode is in use. Commented out by default in case of filtering happening twice?
+	 *
 	 * @since	Pilau_Base 2.0
 	 */
-	add_filter( 'oembed_result', 'pilau_wmode_opaque', 10, 3 );
-	function pilau_wmode_opaque( $html, $url, $args ) {
+	function pilau_wmode_opaque( $html ) {
 		if ( strpos( $html, '<param name="movie"' ) !== false ) {
 			$html = preg_replace( '|</param>|', '</param><param name="wmode" value="opaque"></param>', $html, 1 );
 		}
