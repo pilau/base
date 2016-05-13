@@ -4,6 +4,7 @@
 * Changed `pilau_content()` to not use `get_the_excerpt()` (which uses content if there's no excerpt)
 * Added `pilau_get_roles_for_post_type()` (as part of fixing author meta box drop-down)
 * Add (commented out) `embed_oembed_html` filter for `pilau_wmode_opaque()`
+* Restricted 'Refresh' item in WP admin bar to editors only
 * Fixed a number of minor errors
 
 ## 2.2.1 (2016-01-23)

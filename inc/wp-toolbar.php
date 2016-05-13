@@ -16,10 +16,12 @@ function pilau_base_customize_toolbar( $toolbar ) {
 	}
 
 	/* Generic refreshing of any data cached by theme */
-	$toolbar->add_node(array(
-		'id'		=> 'refresh',
-		'title'		=> 'Refresh',
-		'href'		=> add_query_arg( 'refresh', 1 ),
-	));
+	if ( current_user_can( 'edit_posts' ) ) {
+		$toolbar->add_node(array(
+			'id'		=> 'refresh',
+			'title'		=> 'Refresh',
+			'href'		=> add_query_arg( 'refresh', 1 ),
+		));
+	}
 
 }
