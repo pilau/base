@@ -621,6 +621,110 @@ if ( ! function_exists( 'pilau_link_urls' ) ) {
 }
 
 
+if ( ! function_exists( 'pilau_add_query_arg_multiple' ) ) {
+	/**
+	 * Add a query arg, allowing for multiple values in one arg
+	 *
+	 * @since	Pilau_Base 2.2.2
+	 *
+	 * @param	string	$arg
+	 * @param	mixed	$value
+	 * @param	string	$url
+	 * @param	string	$delimiter
+	 * @return	string
+	 */
+	function pilau_add_query_arg_multiple( $arg, $value, $url = null, $delimiter = ',' ) {
+
+		// Init
+		if ( empty( $url ) ) {
+			$url = pilau_get_current_url();
+		}
+		$found_arg = false;
+
+		// Get the parts
+		$url_parts = parse_url( $url );
+		if ( ! empty( $url_parts['query'] ) ) {
+
+			// Go through query string
+			$query = explode( '&', $url_parts['query'] );
+			foreach ( $query as $query_pair ) {
+				$query_parts = explode( '=', $query_pair );
+				if ( $query_parts[0] == $arg ) {
+					$found_arg = true;
+					// Add new value in
+					$value_parts = explode( $delimiter, $query_parts[1] );
+					$value_parts[] = $value;
+					$new_value = implode( $delimiter, $value_parts );
+					$url = add_query_arg( $arg, $new_value, $url );
+					break;
+				}
+			}
+
+		}
+
+		// If the arg wasn't there, just add it in
+		if ( ! $found_arg ) {
+			$url = add_query_arg( $arg, $value, $url );
+		}
+
+		return $url;
+	}
+}
+
+
+if ( ! function_exists( 'pilau_remove_query_arg_multiple' ) ) {
+	/**
+	 * Remove a query arg, allowing for multiple values in one arg
+	 *
+	 * @since	Pilau_Base 2.2.2
+	 *
+	 * @param	string	$arg
+	 * @param	mixed	$value
+	 * @param	string	$url
+	 * @param	string	$delimiter
+	 * @return	string
+	 */
+	function pilau_remove_query_arg_multiple( $arg, $value, $url = null, $delimiter = ',' ) {
+
+		// Init
+		if ( empty( $url ) ) {
+			$url = pilau_get_current_url();
+		}
+
+		// Get the parts
+		$url_parts = parse_url( $url );
+		if ( ! empty( $url_parts['query'] ) ) {
+
+			// Go through query string
+			$query = explode( '&', $url_parts['query'] );
+			foreach ( $query as $query_pair ) {
+				$query_parts = explode( '=', $query_pair );
+				if ( $query_parts[0] == $arg ) {
+					// Remove the value if present
+					$value_parts = explode( $delimiter, $query_parts[1] );
+					$pos = array_search( $value, $value_parts );
+					if ( $pos !== false ) {
+						unset( $value_parts[ $pos ] );
+						$new_value = implode( $delimiter, $value_parts );
+						if ( ! empty( $new_value ) ) {
+							// Replace with modified value
+							$url = add_query_arg( $arg, $new_value, $url );
+						} else {
+							// Remove altogether, no value left
+							$url = remove_query_arg( $arg, $url );
+						}
+					}
+					break;
+				}
+			}
+
+		}
+
+		return $url;
+	}
+}
+
+
 /* Navigation
 *****************************************************************************/
 
