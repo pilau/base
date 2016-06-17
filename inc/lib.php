@@ -12,6 +12,38 @@
 *****************************************************************************/
 
 
+if ( ! function_exists( 'pilau_get_post_id' ) ) {
+	/**
+	 * Get the current post ID, wherever
+	 *
+	 * @since 2.3
+	 *
+	 * @return	int
+	 */
+	function pilau_get_post_id() {
+		$post_id = null;
+
+		if ( ! defined( 'PILAU_FRONT_OR_AJAX' ) || PILAU_FRONT_OR_AJAX ) {
+
+			// Front end
+			if ( in_the_loop() ) {
+				$post_id = get_the_ID();
+			} else {
+				$post_id = get_queried_object_id();
+			}
+
+		} else {
+
+			// Admin
+			$post_id = (int) $_REQUEST['post'];
+
+		}
+
+		return $post_id;
+	}
+}
+
+
 if ( ! function_exists( 'pilau_get_the_term' ) ) {
 	/**
 	 * Get a single term associated with a post

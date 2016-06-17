@@ -1,8 +1,9 @@
 # Changelog for Pilau Base
 
-## 2.2.2 (????-??-??)
+## 2.3 (????-??-??)
 * Changed `pilau_content()` to not use `get_the_excerpt()` (which uses content if there's no excerpt)
 * Added `pilau_get_roles_for_post_type()` (as part of fixing author meta box drop-down)
+* Added `pilau_get_post_id()`
 * Added (commented out) `embed_oembed_html` filter for `pilau_wmode_opaque()`
 * Added functions for handling query args with multiple values
 * Restricted 'Refresh' item in WP admin bar to editors only
