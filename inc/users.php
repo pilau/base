@@ -156,25 +156,33 @@ if ( ! function_exists( 'pilau_get_user_role' ) ) {
 	 * @uses	maybe_unserialize()
 	 * @uses	WP_User
 	 *
-	 * @param	int|object	$user	Either a user's ID or a user object
-	 * @param	bool		$manual	Optional. If true, a "manual" check is done that avoids using WP functions; use this if the code calling this function is hooked to something that may be called by WP_User, creating an infinite loop
-	 * @return	string|null			The user's role if the operation was successful, otherwise null
+	 * @param	int|object			$user			Either a user's ID or a user object
+	 * @param	bool				$manual			Optional. If true, a "manual" check
+	 * 												is done that avoids using WP functions;
+	 * 												use this if the code calling this function
+	 * 												is hooked to something that may be
+	 * 												called by WP_User, creating an infinite loop
+	 * @param	bool				$return_array	Force return value as array
+	 * @return	string|array|null					The user's role(s) if the operation was successful,
+	 * 												otherwise null
 	 */
-	function pilau_get_user_role( $user, $manual = false ) {
+	function pilau_get_user_role( $user, $manual = false, $return_array = false ) {
 		global $wpdb;
-		$role = null;
+		$roles = null;
+
+		// Try to get user object
 		if ( is_int( $user ) || ctype_digit( $user ) ) {
 			if ( $manual ) {
 				// Manual check
 				global $wpdb;
 				$caps = $wpdb->get_var( $wpdb->prepare("
-				SELECT	meta_value
-				FROM	$wpdb->usermeta
-				WHERE	user_id		= %d
-				AND		meta_key	= %s
-			", intval( $user ), $wpdb->prefix . "capabilities" ) );
+					SELECT	meta_value
+					FROM	$wpdb->usermeta
+					WHERE	user_id		= %d
+					AND		meta_key	= %s
+				", intval( $user ), $wpdb->prefix . "capabilities" ) );
 				if ( $caps ) {
-					$user = new StdClass;
+					$user = new stdClass;
 					$user->roles = array_keys( maybe_unserialize( $caps ) );
 				}
 			} else {
@@ -182,14 +190,31 @@ if ( ! function_exists( 'pilau_get_user_role' ) ) {
 				$user = new WP_User( $user );
 			}
 		}
+
+		// If we've got a user, try to get role(s)
 		if ( is_object( $user ) ) {
 			$caps_field = $wpdb->prefix . 'capabilities';
 			if ( property_exists( $user, 'roles' ) && is_array( $user->roles ) && ! empty( $user->roles ) ) {
-				$role = $user->roles[0];
+				$roles = $user->roles;
 			} else if ( property_exists( $user, $caps_field ) && is_array( $user->$caps_field ) && ! empty( $user->$caps_field ) ) {
-				$role = array_shift( array_keys( $user->$caps_field ) );
+				$roles = array_keys( $user->$caps_field );
 			}
 		}
+
+		// Return as array?
+		if ( $return_array ) {
+			$role = is_null( $roles ) ? array() : $roles;
+		} else {
+			// Return single role as string for backwards-compatibility
+			// Multiple roles as array
+			$role = null;
+			if ( count( $roles ) == 1 ) {
+				$role = $roles[0];
+			} else if ( count( $roles ) > 1 ) {
+				$role = $roles;
+			}
+		}
+
 		return $role;
 	}
 }
