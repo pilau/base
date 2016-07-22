@@ -168,13 +168,34 @@ if ( ! function_exists( 'pilau_get_user_role' ) ) {
 	 */
 	function pilau_get_user_role( $user, $manual = false, $return_array = false ) {
 		global $wpdb;
-		$roles = null;
+		$roles = array();
 
-		// Try to get user object
+		// If an object...
+		if ( is_object( $user ) ) {
+
+			// Does it have roles?
+			if ( empty( $user->roles ) ) {
+
+				// Not sure why it wouldn't, but do manual check
+				$user = $user->ID;
+				$manual = true;
+
+			} else {
+
+				// Set roles from object
+				$roles = $user->roles;
+
+			}
+
+		}
+
+		// Try to get user object from ID?
 		if ( is_int( $user ) || ctype_digit( $user ) ) {
+
+			// Manual check
 			if ( $manual ) {
-				// Manual check
-				global $wpdb;
+
+				// Get capabilities meta
 				$caps = $wpdb->get_var( $wpdb->prepare("
 					SELECT	meta_value
 					FROM	$wpdb->usermeta
@@ -182,40 +203,41 @@ if ( ! function_exists( 'pilau_get_user_role' ) ) {
 					AND		meta_key	= %s
 				", intval( $user ), $wpdb->prefix . "capabilities" ) );
 				if ( $caps ) {
-					$user = new stdClass;
-					$user->roles = array_keys( maybe_unserialize( $caps ) );
+					$roles = array_keys( maybe_unserialize( $caps ) );
 				}
+
 			} else {
+
 				// Standard WP User
 				$user = new WP_User( $user );
-			}
-		}
-
-		// If we've got a user, try to get role(s)
-		if ( is_object( $user ) ) {
-			$caps_field = $wpdb->prefix . 'capabilities';
-			if ( property_exists( $user, 'roles' ) && is_array( $user->roles ) && ! empty( $user->roles ) ) {
 				$roles = $user->roles;
-			} else if ( property_exists( $user, $caps_field ) && is_array( $user->$caps_field ) && ! empty( $user->$caps_field ) ) {
-				$roles = array_keys( $user->$caps_field );
+
 			}
+
 		}
 
-		// Return as array?
-		if ( $return_array ) {
-			$role = is_null( $roles ) ? array() : $roles;
-		} else {
-			// Return single role as string for backwards-compatibility
-			// Multiple roles as array
-			$role = null;
-			if ( count( $roles ) == 1 ) {
-				$role = $roles[0];
-			} else if ( count( $roles ) > 1 ) {
-				$role = $roles;
-			}
+		// Return single role as string for backwards-compatibility
+		if ( ! $return_array && count( $roles ) == 1 ) {
+			$roles = $roles[0];
 		}
 
-		return $role;
+		return $roles;
+	}
+}
+
+
+if ( ! function_exists( 'pilau_user_has_role' ) ) {
+	/**
+	 * Does a user have a particular role?
+	 *
+	 * @since 2.3
+	 *
+	 * @param	object|int	$user
+	 * @param	string		$role
+	 * @return	bool
+	 */
+	function pilau_user_has_role( $user, $role ) {
+		return in_array( $role, pilau_get_user_role( $user, false, true ) );
 	}
 }
 

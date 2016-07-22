@@ -1,7 +1,8 @@
 # Changelog for Pilau Base
 
 ## 2.3 (????-??-??)
-* Changed `pilau_get_user_role()` to work with multiple roles
+* Changed `pilau_get_user_role()` to work with multiple roles - also simplified
+* Added `pilau_user_has_role()`
 * Changed `pilau_content()` to not use `get_the_excerpt()` (which uses content if there's no excerpt)
 * Added `pilau_get_roles_for_post_type()` (as part of fixing author meta box drop-down)
 * Added `pilau_get_post_id()`
