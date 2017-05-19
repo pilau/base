@@ -230,8 +230,8 @@ if ( ! function_exists( 'pilau_explode_constants' ) ) {
 			foreach ( $constants as $constant ) {
 				if ( is_string( $constant ) && defined( $constant ) ) {
 					$var_name = strtolower( $constant );
-					global $$var_name;
-					$$var_name = explode( $sep, constant( $constant ) );
+					global ${$var_name};
+					${$var_name} = explode( $sep, constant( $constant ) );
 				}
 			}
 		}

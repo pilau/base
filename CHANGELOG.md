@@ -1,6 +1,7 @@
 # Changelog for Pilau Base
 
 ## 2.3 (????-??-??)
+* PHP 7 compatibility fixes
 * Changed `pilau_get_user_role()` to work with multiple roles - also simplified
 * Added `pilau_user_has_role()`
 * Changed `pilau_content()` to not use `get_the_excerpt()` (which uses content if there's no excerpt)
