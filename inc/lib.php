@@ -340,10 +340,14 @@ if ( ! function_exists( 'pilau_extract' ) ) {
 	 * @param	int		$max_words
 	 * @param	int		$max_paras	If set to zero, trims to words
 	 * @param	bool	$strip_tags	Strip tags or not. If true, strips WP shortcodes too; if false, parses shortcodes.
+	 * @param	bool	$strip_headers_first
 	 * @return	string
 	 */
-	function pilau_extract( $string, $max_words = 30, $max_paras = 0, $strip_tags = true ) {
+	function pilau_extract( $string, $max_words = 30, $max_paras = 0, $strip_tags = true, $strip_headers_first = false ) {
 		if ( $strip_tags ) {
+			if ( $strip_headers_first ) :
+				$string = preg_replace( '#<h[234]>[^<]+</h[234]>#', '', $string );
+			endif;
 			$string = strip_shortcodes( $string );
 			$string = trim( strip_tags( $string ) );
 		} else {
